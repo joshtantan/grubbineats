@@ -1,6 +1,6 @@
 # USER STORIES
 ## CORE
-1. As a client, I want to see the menu and the prices of each item so that I can choose what to order. 
+1. As a client, I want to see the menu and the prices of each item so that I can choose what to order.
 2. As a client, I want to know the time remaining for my order to be ready so that I can prepare for pick up.
 3. As a client, I want to receive a notification so that I can know when my order is ready for pick up.
 4. As the restaurant staff, I want to see the client's order so that I can prepare it.
@@ -20,6 +20,7 @@
 - menu
   - id (PK)
   - name
+  - description
   - price
   - url_photo
 
@@ -52,21 +53,28 @@
 
 # Routes
 - /staff -- dashboard
+  - /staff/order/:id -- view an order (staff-side)
 - /client -- dashboard
-  - /client/menu
+  - /client/order -- place an order
+  - /client/order/:id -- view an order (client-side)
 
 # Wireframe
-- compare each of our designs
+- Avvai's design to be uploaded to /docs
 
 # ERD Diagrams
-- assign someone to draw ERDs
+- Avvai's ERDs to be uploaded to /docs
 
 # Find Seeds
-- find and install seeds to local databases
+- Avvai pushing seeds to branch and merging with master
 
 # Feature/Branch/Task Assignments
-- split implementations/features into branches and assign team members
+- Branch Name Template: <feature>-<name>
+- Feature/Branches:
+  - Basic template of pages - Avvai
+  - Adding colors and fonts and fix spacings
+  - Client and staff homepage dashboard display and updating
+  - Placing orders and calculating and updating total - Josh
+  - Staff accepting orders (FE form and BE POST route) - Ayushi
+  - Displaying individual order details (2 routes)
+  - Texting API - Josh & Ayushi
 
-# Schedule
-- set milestones
-- plan when to test
