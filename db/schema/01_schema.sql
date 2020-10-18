@@ -25,7 +25,7 @@ CREATE TABLE orders (
   client_id INTEGER REFERENCES users(id),
   status VARCHAR(255) NOT NULL,
   created_at TIMESTAMP,
-  acceoted_at TIMESTAMP,
+  accepted_at TIMESTAMP,
   ready_at TIMESTAMP
 );
 
