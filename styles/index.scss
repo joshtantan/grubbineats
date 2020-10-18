@@ -1,0 +1,32 @@
+button {
+  background-color: orange;
+}
+
+#active-orders-table {
+  border-collapse: collapse;
+
+  th, td {
+    border: 3px solid;
+    padding: 5px;
+  }
+
+  th { background-color: green}
+
+}
+
+
+#past-orders-table {
+  border-collapse: collapse;
+
+  th, td {
+    border: 3px solid;
+    padding: 5px;
+  }
+
+  th {
+    background-color: rosybrown;
+  }
+
+}
+
+
