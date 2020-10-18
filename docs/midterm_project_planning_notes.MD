@@ -59,13 +59,13 @@
   - /client/order/:id -- view an order (client-side)
 
 # Wireframe
-- Avvai's design to be uploaded to /docs
+- Avvai's design to be uploaded to /docs (DONE)
 
 # ERD Diagrams
-- Avvai's ERDs to be uploaded to /docs
+- Avvai's ERDs to be uploaded to /docs (DONE)
 
 # Find Seeds
-- Avvai pushing seeds to branch and merging with master
+- Avvai pushing seeds to branch and merging with master (DONE)
 
 # Feature/Branch/Task Assignments
 - Branch Name Template: <feature>-<name>
