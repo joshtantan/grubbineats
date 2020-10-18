@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Grubbin' Eats</title>
+
+    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+
+    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+    <script type="text/javascript" src="/scripts/app.js"></script>
+  </head>
+
+  <body>
+    <!-- nav bar  -->
+    <%- include('partials/_nav') %>
+    <h2>This is the client's individual order page</h1>
+    <!-- button to order -->
+    <div class = "single-order-container">
+      <p>
+        Order Number: 1003
+        Order Date: 3/13/2020
+      </p>
+    </div>
+
+    <form method = "GET" action = "/staff">
+      <button type = "submit"> Go back to orders</button>
+    </form>
+
+  </body>
+</html>
