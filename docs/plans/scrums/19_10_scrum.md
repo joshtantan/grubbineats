@@ -12,6 +12,7 @@
   - Ayushi
     - build order viewing page for client and staff
   - Avvai
-    - style menu page
+    - style menu page and continue to add implementation features
   - Josh
+    - get up to speed with current project state
     - implement placing and calculating orders total functionality
