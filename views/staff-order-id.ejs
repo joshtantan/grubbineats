@@ -17,10 +17,11 @@
     <%- include('partials/_nav') %>
     <h2>This is the staff individual order page</h1>
     <!-- button to order -->
+    <% for (let obj in detail) { %>
     <div class = "single-order-container">
       <p>
-        Order Number: 1003
-        Order Date: 3/13/2020
+        Order Number: <%= detail[obj]['order_id'] %> </br>
+        Order Date: <%= detail[obj]['created_at'] %>
       </p>
     </div>
 
@@ -34,10 +35,11 @@
         </tr>
       </thead>
       <tbody>
-        <% for (let obj in detail) { %>
+        
           
             <tr>
-              <td> <%= detail[obj]['url_photo'] %></td> 
+              <td> <img src= <%= detail[obj]['url_photo'] %> ></td>
+               
               <td> <%= detail[obj]['item_name'] %> </td>
               <td> <%= detail[obj]['quantity'] %> </td>
               <td> <%= detail[obj]['price_cents'] %></td>
@@ -48,7 +50,7 @@
 
       </tbody>
     </table>
-
+  </br>
     <form method = "GET" action = "/staff">
       <button type = "submit"> Go back to orders</button>
     </form>

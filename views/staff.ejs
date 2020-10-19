@@ -45,7 +45,7 @@
           
            
             <tr>
-              <td> <button> <%= order[obj]['id'] %> </button> </td> 
+              <td> <a href="/staff/order/<%= order[obj]['id'] %>"> <button> <%= order[obj]['id'] %>  </button></a></td> 
               <td> <%= order[obj]['created_at'] %></td>
               <td> <%= order[obj]['status'] %></td>
             </tr>
@@ -74,7 +74,7 @@
           
            
           <tr>
-            <td> <button> <%= pastorder[obj]['id'] %> </button> </td> 
+            <td> <a href="/staff/order/<%= pastorder[obj]['id'] %>"> <button> <%= pastorder[obj]['id'] %>  </button></a> </td> 
             <td> <%= pastorder[obj]['created_at'] %></td>
             <td> <%= pastorder[obj]['status'] %></td>
           </tr>

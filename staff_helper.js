@@ -15,7 +15,7 @@ module.exports = (db) => {
   };
 
   const updateOrder = (orderid, readytime) => {
-    return db.query(`UPDATE orders SET status = 'workinprogress', ready_at = ${readytime}  WHERE id = ${orderid}`)
+    return db.query(`UPDATE orders SET status = 'workinpogress', ready_at = ${readytime}  WHERE id = ${orderid}`)
     .then (res => {
       console.log("from query", res.rows);
       return res.rows;
@@ -29,6 +29,9 @@ module.exports = (db) => {
     JOIN orders ON orders.id = menu_orders.order_id
     WHERE orders.id = ${orderid}
     `)
+    .then (res => {
+      return res.rows;
+    })
   };
 
   

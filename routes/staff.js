@@ -44,6 +44,31 @@ router.post('/', (req, res) => {
   // update status and readytime in helper
   helper.updateOrder(orderid, readytime);
 
+
+  helper.getOrders()
+  .then(orders => {
+    
+     let returnobj = {'order': orders};
+    //res.json(returnobj);
+
+    helper.getPastOrders()
+    .then(pastorders => {
+    
+      returnobj['pastorder'] = pastorders;
+      //res.json(returnpastobj);
+     
+      res.render('staff',returnobj);
+    
+    });
+    
+    
+  });
+
+
+
+  // redirecting to staff
+  res.redirect('/staff/');
+
   //twilio message
   const accountSid = process.env.TWILIO_ACCOUNT_SID;
   const autheToken = process.env.TWILIO_ATTH_TOKEN;
@@ -59,8 +84,7 @@ router.post('/', (req, res) => {
 
 
 
-  // redirecting to staff
-  res.redirect('/staff/');
+  
 
 
     
@@ -76,9 +100,9 @@ router.get("/order/:id", (req, res) => {
   console.log(req.params.id);
   helper.orderDetails(orderid)
   .then(details => {
-    let detailObject = {detail: details.rows};
+    let detailObject = {detail: details};
     
-
+    
     //res.json(detailObject);
     res.render("staff-order-id", detailObject);
   })
