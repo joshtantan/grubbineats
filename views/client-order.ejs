@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/client-order.css" type="text/css" />
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
@@ -14,10 +15,38 @@
   <body>
     <!-- nav bar  -->
     <%- include('partials/_nav') %>
-    <h2>This is the menu/order page</h1>
+    <h2>Place your order here: </h2>
+
+    <div id = "menu">
+      <div class = "menu-row">
+
+        <div class = "menu-image">
+          <img src = "https://static.thenounproject.com/png/30194-200.png" alt = "icon of a slice of pizza">
+        </div>
+
+        <div class = "menu-item">
+          <h3>${menu.item_name}</h3>
+          <p>Tastiest slice you'll ever eat!</p>
+        </div>
+
+        <div class = "item-price">
+         <p>$13.00</p>
+        </div>
+
+        <div class = "quantity-input">
+          <input type="number" min="0" max ="50" value="0">
+        </div>
+      </div>
+    </div>
+
+    <h2> Your Total </h2>
+    <div class = "order-total">
+      <p>$0.00</p>
+    </div>
+
     <!-- button to order -->
-    <!-- <form method = "GET" action = "/client/order"> -->
-      <button type = "submit"> Send Order </button>
+    <form method = "POST" action = "/">
+    <button type = "submit"> Send Order </button>
     </form>
 
   </body>
