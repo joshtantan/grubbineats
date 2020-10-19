@@ -31,19 +31,18 @@ app.use('/styles', sass({
   outputStyle: 'expanded'
 }));
 
-const clientsRoutes = require('./routes/clients');
-
-// Helper to query db
+// Attach helpers to query db
 const staffHelper = require('./staff_helper')(db);
+const clientsRoutes = require('./routes/clients')(staffHelper);
 const staffRoutes = require('./routes/staff')(staffHelper);
 
 // Mount all resource routes
-app.use('/clients', clientsRoutes(db));
+app.use('/client', clientsRoutes);
 app.use('/staff', staffRoutes);
 
 // Home page
 app.get('/', (req, res) => {
-  res.render('index');
+  res.redirect('/client');
 });
 
 app.listen(PORT, () => {
