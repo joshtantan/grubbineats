@@ -24,7 +24,7 @@ module.exports = (db) => {
   //     });
   // });
     res.render("client-order");
-  // });
+  });
 
   //individual order page
   router.get("/order/:id", (req, res) => {
