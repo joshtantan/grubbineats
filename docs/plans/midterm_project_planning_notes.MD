@@ -72,9 +72,9 @@
 - Feature/Branches:
   - Basic template of pages - Avvai
   - Adding colors and fonts and fix spacings
-  - Client and staff homepage dashboard display and updating
+  - Client and staff homepage dashboard display and updating - Avvai
   - Placing orders and calculating and updating total - Josh
   - Staff accepting orders (FE form and BE POST route) - Ayushi
-  - Displaying individual order details (2 routes)
+  - Displaying individual order details (2 routes) - Ayushi
   - Texting API - Josh & Ayushi
 
