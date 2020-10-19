@@ -2,10 +2,15 @@
 const express = require('express');
 const router  = express.Router();
 
+
+
 module.exports = (db) => {
+
+ 
 router.get("/", (req, res) => {
   res.render("staff");
-})
+
+});
 
 router.get("/order/:id", (req, res) => {
   res.render("staff-order-id")
@@ -31,3 +36,4 @@ router.get("/order/:id", (req, res) => {
 //           .json({ error: err.message });
 //       });
 //   });
+// }
