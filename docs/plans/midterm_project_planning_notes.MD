@@ -77,4 +77,3 @@
   - Staff accepting orders (FE form and BE POST route) - Ayushi
   - Displaying individual order details (2 routes) - Ayushi
   - Texting API - Josh & Ayushi
-
