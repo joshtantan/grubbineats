@@ -34,12 +34,17 @@ app.use(express.static("public"));
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
 const clientsRoutes = require("./routes/clients");
-const staffRoutes = require("./routes/staff");
+
+
+// helper to query db
+const staffHelper = require('./staff_helper')(db);
+const staffRoutes = require("./routes/staff")(staffHelper);
+
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/clients", clientsRoutes(db));
-app.use("/staff", staffRoutes(db));
+app.use("/staff", staffRoutes);
 // Note: mount other resources here, using the same pattern above
 
 
