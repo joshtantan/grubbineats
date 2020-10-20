@@ -26,25 +26,25 @@
     <button type = "submit"> Send Order </button>
     </form>
 
-    <% for (let obj in menu_data) { %>
+    <% for (const menu_item of menu_data) { %>
     <div id = "menu">
       <div class = "menu-row">
 
         <div class = "menu-image">
-          <img src = <%= menu_data[obj]['url_photo'] %> >
+          <img src = <%= menu_item['url_photo'] %> >
         </div>
 
         <div class = "menu-item">
-          <h3> <%= menu_data[obj]['item_name']%> </h3>
-           <p><%= menu_data[obj]['description'] %> </p>
+          <h3> <%= menu_item['item_name']%> </h3>
+           <p><%= menu_item['description'] %> </p>
         </div>
 
         <div class = "item-price">
-        $<%= menu_data[obj]['price_cents']/100 %>
+        $<%= menu_item['price_cents']/100 %>
         </div>
 
         <div class = "quantity-input">
-          <input class="dish-counter" id= "<%= menu_data[obj]['price_cents']/100 %>" type="number" min="0" max ="50" value="0">
+          <input class="dish-counter" id= "<%= menu_item['price_cents']/100 %>" type="number" min="0" max ="50" value="0">
         </div>
 
       </div>

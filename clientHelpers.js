@@ -26,7 +26,7 @@ module.exports = db => {
     });
   };
 
-  const getOrderDetails = (orderId = 1) => {
+  const getOrderDetails = (orderId) => {
     return db.query(`
       SELECT orders.id, url_photo, item_name, description, quantity, price_cents
       FROM orders
@@ -34,9 +34,7 @@ module.exports = db => {
       JOIN menu ON menu.id = menu_orders.menu_id
       WHERE orders.id = ${orderId};
     `)
-    .then(res => {
-      return res.rows;
-    })
+    .then(res => res.rows)
     .catch(e => {
       console.error(e);
       res.status(500);
