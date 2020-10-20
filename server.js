@@ -13,6 +13,8 @@ const morgan     = require('morgan');
 // PG database client/connection setup
 const { Pool } = require('pg');
 const dbParams = require('./lib/db.js');
+//moment API to diaply time and date in 'MMMM Do YYYY, h:mm:ss a' format
+const moment = require("moment");
 const db = new Pool(dbParams);
 db.connect();
 
@@ -20,6 +22,15 @@ db.connect();
 // 'dev' = Concise output colored by response status for development use.
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
 app.use(morgan('dev'));
+
+
+// using moment
+app.use((req, res, next)=>{
+    res.locals.moment = moment;
+    next();
+  });
+
+
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -46,6 +57,7 @@ const staffRoutes = require("./routes/staff")(staffHelper);
 app.use("/clients", clientsRoutes(db));
 app.use("/staff", staffRoutes);
 // Note: mount other resources here, using the same pattern above
+
 
 
 // Home page

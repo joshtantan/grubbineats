@@ -21,7 +21,7 @@
     <div class = "single-order-container">
       <p>
         Order Number: <%= detail[obj]['order_id'] %> </br>
-        Order Date: <%= detail[obj]['created_at'] %>
+        Order Date: <%= moment(detail[obj]['created_at']).format('MMMM Do YYYY, h:mm:ss a')  %>
       </p>
     </div>
 

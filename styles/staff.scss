@@ -1,5 +1,6 @@
 button {
   background-color: orange;
+
 }
 
 #active-orders-table {
@@ -11,6 +12,9 @@ button {
   }
 
   th { background-color: green}
+  button {
+    width: 150px;
+  }
 
 }
 
@@ -25,6 +29,10 @@ button {
 
   th {
     background-color: rosybrown;
+  }
+
+  button {
+    width: 150px;
   }
 
 }
