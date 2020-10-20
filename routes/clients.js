@@ -15,7 +15,6 @@ module.exports = (db) => {
        db.query(`SELECT * FROM menu;`)
       .then(data => {
         const menu = {menu_data: data.rows};
-        console.log("this is menu : ", menu)
         res.render("client-order", menu);
         // res.json({ menu});
       })

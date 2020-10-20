@@ -18,9 +18,9 @@
     <h2>Place your order here: </h2>
 
     <h2> Your Total </h2>
-    <div class = "order-total">
-      <p>$0.00</p>
-    </div>
+    <!-- <input id = "total-price" value = "$0.00"> </input> -->
+    <p id="total-price">$0.00</p>
+
 
     <!-- button to order -->
     <form method = "POST" action = "/">
@@ -41,16 +41,36 @@
         </div>
 
         <div class = "item-price">
-         <p>$<%= menu_data[obj]['price_cents']/100 %> </p>
+        $<%= menu_data[obj]['price_cents']/100 %>
         </div>
 
         <div class = "quantity-input">
-          <input type="number" min="0" max ="50" value="0">
+          <input class="dish-counter" id= "<%= menu_data[obj]['price_cents']/100 %>" type="number" min="0" max ="50" value="0">
         </div>
+
       </div>
     </div>
 
     <% } %>
+
+
+    <script type = "text/javascript">
+      $(document).ready(function() {
+        $('.dish-counter').change(function(){
+          let total = 0;
+
+          $('.dish-counter').each(function () {
+            let quantityOutput = parseFloat($(this).val())
+            let price = parseFloat($(this).attr("id"))
+            total += quantityOutput * price
+           })
+          let totalString = `$${total.toFixed(2)}`
+          $('#total-price').html(totalString)
+        })
+      })
+    </script>
+
+
 
   </body>
 </html>
