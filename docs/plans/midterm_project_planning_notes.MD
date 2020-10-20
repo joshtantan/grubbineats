@@ -71,9 +71,11 @@
 - Branch Name Template: <feature>-<name>
 - Feature/Branches:
   - Basic template of pages - Avvai
-  - Adding colors and fonts and fix spacings
+  - Adding colors and fonts and fix spacings - Avvai (+team)
   - Client and staff homepage dashboard display and updating - Avvai
-  - Placing orders and calculating and updating total - Josh
+  - Calculating and updating order total with jQuery - Avvai
   - Staff accepting orders (FE form and BE POST route) - Ayushi
+  - Client BE psql queries - Josh
+  - Client POST routes - Josh
   - Displaying individual order details (2 routes) - Ayushi
   - Texting API - Josh & Ayushi

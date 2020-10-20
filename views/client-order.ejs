@@ -17,37 +17,59 @@
     <%- include('partials/_nav') %>
     <h2>Place your order here: </h2>
 
-    <div id = "menu">
-      <div class = "menu-row">
-
-        <div class = "menu-image">
-          <img src = "https://static.thenounproject.com/png/30194-200.png" alt = "icon of a slice of pizza">
-        </div>
-
-        <div class = "menu-item">
-          <h3>${menu.item_name}</h3>
-          <p>Tastiest slice you'll ever eat!</p>
-        </div>
-
-        <div class = "item-price">
-         <p>$13.00</p>
-        </div>
-
-        <div class = "quantity-input">
-          <input type="number" min="0" max ="50" value="0">
-        </div>
-      </div>
-    </div>
-
     <h2> Your Total </h2>
-    <div class = "order-total">
-      <p>$0.00</p>
-    </div>
+    <p id="total-price">$0.00</p>
+
 
     <!-- button to order -->
     <form method = "POST" action = "/">
     <button type = "submit"> Send Order </button>
     </form>
+
+    <% for (let obj in menu_data) { %>
+    <div id = "menu">
+      <div class = "menu-row">
+
+        <div class = "menu-image">
+          <img src = <%= menu_data[obj]['url_photo'] %> >
+        </div>
+
+        <div class = "menu-item">
+          <h3> <%= menu_data[obj]['item_name']%> </h3>
+           <p><%= menu_data[obj]['description'] %> </p>
+        </div>
+
+        <div class = "item-price">
+        $<%= menu_data[obj]['price_cents']/100 %>
+        </div>
+
+        <div class = "quantity-input">
+          <input class="dish-counter" id= "<%= menu_data[obj]['price_cents']/100 %>" type="number" min="0" max ="50" value="0">
+        </div>
+
+      </div>
+    </div>
+
+    <% } %>
+
+
+    <script type = "text/javascript">
+      $(document).ready(function() {
+        $('.dish-counter').change(function(){
+          let total = 0;
+
+          $('.dish-counter').each(function () {
+            let quantityOutput = parseFloat($(this).val())
+            let price = parseFloat($(this).attr("id"))
+            total += quantityOutput * price
+           })
+          let totalString = `$${total.toFixed(2)}`
+          $('#total-price').html(totalString)
+        })
+      })
+    </script>
+
+
 
   </body>
 </html>

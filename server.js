@@ -3,10 +3,10 @@ require('dotenv').config();
 
 // Web server config
 const PORT       = process.env.PORT || 8080;
-const ENV        = process.env.ENV || "development";
-const express    = require("express");
-const bodyParser = require("body-parser");
-const sass       = require("node-sass-middleware");
+const ENV        = process.env.ENV || 'development';
+const express    = require('express');
+const bodyParser = require('body-parser');
+const sass       = require('node-sass-middleware');
 const app        = express();
 const morgan     = require('morgan');
 
@@ -24,6 +24,7 @@ db.connect();
 app.use(morgan('dev'));
 
 
+
 // using moment
 app.use((req, res, next)=>{
     res.locals.moment = moment;
@@ -33,31 +34,26 @@ app.use((req, res, next)=>{
 
 
 app.set("view engine", "ejs");
+
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use("/styles", sass({
-  src: __dirname + "/styles",
-  dest: __dirname + "/public/styles",
+app.use(express.static('public'));
+
+app.use('/styles', sass({
+  src: __dirname + '/styles',
+  dest: __dirname + '/public/styles',
   debug: true,
   outputStyle: 'expanded'
 }));
-app.use(express.static("public"));
 
-// Separated Routes for each Resource
-// Note: Feel free to replace the example routes below with your own
-const clientsRoutes = require("./routes/clients");
-
-
-// helper to query db
-const staffHelper = require('./staff_helper')(db);
-const staffRoutes = require("./routes/staff")(staffHelper);
-
+// Attach helpers to query db
+const clientHelpers = require('./clientHelpers.js')(db);
+const staffHelpers = require('./staff_helper')(db);
+const clientRoutes = require('./routes/clients')(clientHelpers);
+const staffRoutes = require('./routes/staff')(staffHelpers);
 
 // Mount all resource routes
-// Note: Feel free to replace the example routes below with your own
-app.use("/clients", clientsRoutes(db));
-app.use("/staff", staffRoutes);
-// Note: mount other resources here, using the same pattern above
-
+app.use('/client', clientRoutes);
+app.use('/staff', staffRoutes);
 
 
 // Home page
@@ -67,6 +63,11 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
+// Home page redirect
+app.get('/', (req, res) => {
+  res.redirect('/client');
+});
+
 app.listen(PORT, () => {
-  console.log(`Example app listening on port ${PORT}`);
+  console.log(`grubbineats app listening on port ${PORT}`);
 });
