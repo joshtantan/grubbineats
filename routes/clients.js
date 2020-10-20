@@ -4,7 +4,7 @@ const router  = express.Router();
 module.exports = (dbHelpers) => {
   // Dashboard page
   router.get('/', (req, res) => {
-    dbHelpers.getInactiveOrders()
+    dbHelpers.getOrders()
     .then(data => {
       console.log('data :', data);
       // data = array of order objects to be used in .ejs

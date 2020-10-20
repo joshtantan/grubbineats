@@ -32,7 +32,7 @@ module.exports = db => {
       FROM orders
       JOIN menu_orders ON orders.id = menu_orders.order_id
       JOIN menu ON menu.id = menu_orders.menu_id
-      WHERE orders.id = 1;
+      WHERE orders.id = ${orderId};
     `)
     .then(res => {
       return res.rows;
