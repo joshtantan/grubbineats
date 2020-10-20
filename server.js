@@ -36,7 +36,6 @@ app.use((req, res, next)=>{
 app.set("view engine", "ejs");
 
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static('public'));
 
 app.use('/styles', sass({
   src: __dirname + '/styles',
@@ -44,6 +43,8 @@ app.use('/styles', sass({
   debug: true,
   outputStyle: 'expanded'
 }));
+
+app.use(express.static('public'));
 
 // Attach helpers to query db
 const clientHelpers = require('./clientHelpers.js')(db);
