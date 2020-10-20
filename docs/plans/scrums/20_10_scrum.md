@@ -45,4 +45,4 @@
 - What are you working on today?
   - Avvai: 
   - Ayushi: 
-  - Josh: sync up and merge Ayushi's BE code with master, refactoring, POST routes, Twilio (if extra time)
+  - Josh: sync up and merge Ayushi's BE code with master, refactoring, POST routes
