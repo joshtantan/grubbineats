@@ -8,6 +8,7 @@ module.exports = db => {
     .then(res => res.rows)
     .catch(e => {
       console.error(e);
+      res.status(500);
       res.send(e);
     });
   };
@@ -20,6 +21,7 @@ module.exports = db => {
     .then(res => res.rows)
     .catch(e => {
       console.error(e);
+      res.status(500);
       res.send(e);
     });
   };
@@ -37,6 +39,7 @@ module.exports = db => {
     })
     .catch(e => {
       console.error(e);
+      res.status(500);
       res.send(e);
     });
   };
@@ -50,6 +53,7 @@ module.exports = db => {
     .then(res => res.rows)
     .catch(e => {
       console.error(e);
+      res.status(500);
       res.send(e);
     });
   };
@@ -63,6 +67,7 @@ module.exports = db => {
     .then(res => res.rows)
     .catch(e => {
       console.error(e);
+      res.status(500);
       res.send(e);
     });
   };
@@ -83,6 +88,7 @@ module.exports = db => {
     })
     .catch(e => {
       console.error(e);
+      res.status(500);
       res.send(e);
     });
   };
