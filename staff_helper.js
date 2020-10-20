@@ -6,6 +6,11 @@ module.exports = (db) => {
       
       return res.rows;
     })
+    .catch(e => {
+      console.error(e);
+      res.status(500);
+      res.send(e);
+    });
   };
 
   // get all past orders
@@ -15,6 +20,11 @@ module.exports = (db) => {
       
       return res.rows;
     })
+    .catch(e => {
+      console.error(e);
+      res.status(500);
+      res.send(e);
+    });
   };
 
   // update order with ready time
@@ -24,6 +34,11 @@ module.exports = (db) => {
       console.log("from query", res.rows);
       return res.rows;
     })
+    .catch(e => {
+      console.error(e);
+      res.status(500);
+      res.send(e);
+    });
   };
 
   // get order details
@@ -37,6 +52,11 @@ module.exports = (db) => {
     .then (res => {
       return res.rows;
     })
+    .catch(e => {
+      console.error(e);
+      res.status(500);
+      res.send(e);
+    });
   };
 
   

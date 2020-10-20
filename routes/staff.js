@@ -27,6 +27,10 @@ module.exports = (helper) => {
         res.render('staff',returnobj);
       
       });
+    })
+    .catch(e => {
+      console.log(e);
+      res.send(e);
     });
 
   });
@@ -74,7 +78,10 @@ module.exports = (helper) => {
       //res.json(detailObject);
       res.render("staff-order-id", detailObject);
     })
-    //res.render("staff-order-id")
+    .catch(e => {
+      console.log(e);
+      res.send(e);
+    });
   })
 
   return router;
