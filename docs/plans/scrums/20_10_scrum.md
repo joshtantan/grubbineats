@@ -24,6 +24,7 @@
 
 ## TECH DEBT
 - must refactor data helpers to use pool for parameterized queries
+- research and implement Heroku
 - must add completed_at to orders table via sql schema
   - must adapt seed data to match
   - must inform team to reset database with new schema and seeds
