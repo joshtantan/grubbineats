@@ -1,4 +1,5 @@
 module.exports = db => {
+  // @TODELETE after testing
   const getOrders = () => {
     return db.query(`
       SELECT *
@@ -11,33 +12,96 @@ module.exports = db => {
     });
   };
 
-  const getPastOrders = () => {
-    return db.query(`SELECT id,status,created_at FROM orders WHERE status like '%completed%'`)
-    .then((res) => {
-      return res.rows;
-    })
-  };
-
-  const updateOrder = (orderid, readytime) => {
-    return db.query(`UPDATE orders SET status = 'workinprogress', ready_at = ${readytime}  WHERE id = ${orderid}`)
-    .then (res => {
-      return res.rows;
-    })
-  };
-
-  const orderDetails = (orderid) => {
-    return db.query(`select url_photo, item_name , description, price_cents, menu_orders.order_id, menu_orders.quantity, orders.created_at
-    FROM menu
-    JOIN menu_orders ON menu.id = menu_orders.menu_id
-    JOIN orders ON orders.id = menu_orders.order_id
-    WHERE orders.id = ${orderid}
+  const getMenu = () => {
+    return db.query(`
+      SELECT *
+      FROM menu;
     `)
+    .then(res => res.rows)
+    .catch(e => {
+      console.error(e);
+      res.send(e);
+    });
   };
+
+  const getOrderDetails = (orderId = 1) => {
+    return db.query(`
+      SELECT orders.id, url_photo, item_name, description, quantity, price_cents
+      FROM orders
+      JOIN menu_orders ON orders.id = menu_orders.order_id
+      JOIN menu ON menu.id = menu_orders.menu_id
+      WHERE orders.id = 1;
+    `)
+    .then(res => {
+      return res.rows;
+    })
+    .catch(e => {
+      console.error(e);
+      res.send(e);
+    });
+  };
+
+  const getActiveOrders = () => {
+    return db.query(`
+      SELECT *
+      FROM orders
+      WHERE status <> 'completed';
+    `)
+    .then(res => res.rows)
+    .catch(e => {
+      console.error(e);
+      res.send(e);
+    });
+  };
+
+  const getInactiveOrders = () => {
+    return db.query(`
+      SELECT *
+      FROM orders
+      WHERE status = 'completed';
+    `)
+    .then(res => res.rows)
+    .catch(e => {
+      console.error(e);
+      res.send(e);
+    });
+  };
+
+  const updateOrder = (orderId, status) => {
+    // add ifs to check status and determine which time to update in query
+    // i.e.
+    // status = accepted ? accepted_at = NOW()
+    // status = ready ? ready_at = NOW()
+
+    return db.query(`
+      UPDATE orders
+      SET status = ${status}, ready_at = NOW()
+      WHERE id = ${orderId};
+    `)
+    .then(res => {
+      return res.rows;
+    })
+    .catch(e => {
+      console.error(e);
+      res.send(e);
+    });
+  };
+
+  // @TODO
+  // const addOrder = () => {
+  //   // must use several statements in order of FK dependence for each table
+  //   // i.e.
+  //   // 1. INSERT INTO orders (with client_id already in database)
+  //   //   a. Research how to use RETURNING within [1] to get new order_id back
+  //   // 2. INSERT INTO menu_orders (with order_id)
+  // }
 
   return {
     getOrders,
-    getPastOrders,
-    updateOrder,
-    orderDetails
+    getMenu,
+    getOrderDetails,
+    getActiveOrders,
+    getInactiveOrders,
+    updateOrder
   }
 }
