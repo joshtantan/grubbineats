@@ -31,6 +31,7 @@
     - use `npm run db:reset` after pulling new seed and schema files
 
 ## REFACTORING
+- delete `.DS_Store` and add ```*.DS_Store``` to `.gitignore` file
 - refactor folder directory structure
   - mkdir server
     - place server.js inside
