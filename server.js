@@ -22,7 +22,6 @@ db.connect();
 app.use(morgan('dev'));
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static('public'));
 
 app.use('/styles', sass({
   src: __dirname + '/styles',
@@ -30,6 +29,8 @@ app.use('/styles', sass({
   debug: true,
   outputStyle: 'expanded'
 }));
+
+app.use(express.static('public'));
 
 // Attach helpers to query db
 const staffHelper = require('./staff_helper')(db);
