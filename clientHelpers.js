@@ -99,7 +99,8 @@ module.exports = db => {
   //   // i.e.
   //   // 1. INSERT INTO orders (with client_id already in database)
   //   //   a. Research how to use RETURNING within [1] to get new order_id back
-  //   // 2. INSERT INTO menu_orders (with order_id)
+  //   // 2. INSERT INTO menu_orders (with order_id) for each item (with quantity)
+  //   // 3. Repeat Step 2 until each menu item is added
   // }
 
   return {
