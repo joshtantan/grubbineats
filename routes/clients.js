@@ -8,44 +8,23 @@
 const express = require('express');
 const router  = express.Router();
 
-module.exports = (db) => {
+module.exports = (dbHelpers) => {
+  // Dashboard page
+  router.get('/', (req, res) => {
+    res.render('index');
+  })
 
-  // menu order page
-  router.get("/order", (req, res) => {
-       db.query(`SELECT * FROM menu;`)
-      .then(data => {
-        const menu = {menu_data: data.rows};
-        res.render("client-order", menu);
-        // res.json({ menu});
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
+  // Menu order page
+  router.get('/order', (req, res) => {
+    res.render('client-order');
   });
     // res.render("client-order");
   // });
 
-  //individual order page
-  router.get("/order/:id", (req, res) => {
-    res.render("client-order-id")
+  // Individual order page
+  router.get('/order/:id', (req, res) => {
+    res.render('client-order-id')
   });
-
 
   return router;
 };
-
-
-  // router.get("/", (req, res) => {
-  //   db.query(`SELECT * FROM users;`)
-  //     .then(data => {
-  //       const users = data.rows;
-  //       res.json({ users });
-  //     })
-  //     .catch(err => {
-  //       res
-  //         .status(500)
-  //         .json({ error: err.message });
-  //     });
-  // });

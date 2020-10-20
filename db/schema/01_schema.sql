@@ -19,7 +19,6 @@ CREATE TABLE menu (
   url_photo VARCHAR(255)
 );
 
-
 CREATE TABLE orders (
   id SERIAL PRIMARY KEY NOT NULL,
   client_id INTEGER REFERENCES users(id),
@@ -35,3 +34,5 @@ CREATE TABLE menu_orders (
   menu_id INTEGER REFERENCES menu(id) NOT NULL,
   quantity INTEGER NOT NULL
 );
+
+

@@ -18,14 +18,14 @@
     <h2>Staff Page</h1>
     <!-- button to order -->
     <h3>Accept orders here: </h3>
-    <form class = "accept-orders" method = "POST" action = "/">
+    <form class = "accept-orders" method = "POST" action = "/staff/">
       <label for ="order-id">Enter the order id: </label>
       <input type="text" name = "order_id">
 
       <label for = "completion-time">Enter the completion time: </label>
-      <input type="text" name = "completion-time">
+      <input type="text" name = "completion_time">
 
-      <button type = "submit"> Accept Order </button>
+      <button type = "submit" > Accept Order </button>
     </form>
     <!-- active orders tables -->
     <h3> Active Orders </h3>
@@ -38,11 +38,22 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>001</td>
-        </tr>
-        <tr></tr>
-        <tr></tr>
+        
+        
+        
+          <% for (let obj in order) { %>
+          
+           
+            <tr>
+              <td> <button> <%= order[obj]['id'] %> </button> </td> 
+              <td> <%= order[obj]['created_at'] %></td>
+              <td> <%= order[obj]['status'] %></td>
+            </tr>
+
+       
+          <% } %>
+        
+
       </tbody>
     </table>
     <!-- past orders tables -->
@@ -56,11 +67,23 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>001</td>
-        </tr>
-        <tr></tr>
-        <tr></tr>
+        
+          
+           
+        <% for (let obj in pastorder) { %>
+          
+           
+          <tr>
+            <td> <button> <%= pastorder[obj]['id'] %> </button> </td> 
+            <td> <%= pastorder[obj]['created_at'] %></td>
+            <td> <%= pastorder[obj]['status'] %></td>
+          </tr>
+
+     
+        <% } %>
+
+     
+        
       </tbody>
     </table>
   </body>
