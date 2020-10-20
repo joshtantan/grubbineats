@@ -32,13 +32,13 @@ app.use('/styles', sass({
 }));
 
 // Attach helpers to query db
-const staffHelpers = require('./staff_helper')(db);
-const staffRoutes = require('./routes/staff')(staffHelpers);
 const clientHelpers = require('./clientHelpers.js')(db);
-const clientsRoutes = require('./routes/clients')(clientHelpers);
+const staffHelpers = require('./staff_helper')(db);
+const clientRoutes = require('./routes/clients')(clientHelpers);
+const staffRoutes = require('./routes/staff')(staffHelpers);
 
 // Mount all resource routes
-app.use('/client', clientsRoutes);
+app.use('/client', clientRoutes);
 app.use('/staff', staffRoutes);
 
 // Home page redirect

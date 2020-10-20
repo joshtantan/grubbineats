@@ -1,15 +1,19 @@
-module.exports = (db) => {
+module.exports = db => {
   const getOrders = () => {
-    return db.query(`SELECT id,status,created_at FROM orders WHERE status <> 'completed'`)
-    .then((res) => {
-
-      return res.rows;
-    })
+    return db.query(`
+      SELECT *
+      FROM orders;
+    `)
+    .then(res => res.rows)
+    .catch(e => {
+      console.error(e);
+      res.send(e);
+    });
   };
+
   const getPastOrders = () => {
     return db.query(`SELECT id,status,created_at FROM orders WHERE status like '%completed%'`)
     .then((res) => {
-
       return res.rows;
     })
   };
@@ -17,7 +21,6 @@ module.exports = (db) => {
   const updateOrder = (orderid, readytime) => {
     return db.query(`UPDATE orders SET status = 'workinprogress', ready_at = ${readytime}  WHERE id = ${orderid}`)
     .then (res => {
-      console.log("from query", res.rows);
       return res.rows;
     })
   };
@@ -31,13 +34,10 @@ module.exports = (db) => {
     `)
   };
 
-
-
   return {
     getOrders,
     getPastOrders,
     updateOrder,
     orderDetails
-
   }
 }

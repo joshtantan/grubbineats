@@ -4,8 +4,23 @@ const router  = express.Router();
 module.exports = (dbHelpers) => {
   // Dashboard page
   router.get('/', (req, res) => {
-    res.render('index');
-  })
+    dbHelpers.getOrders()
+    .then(data => {
+      console.log('in clients.js get / data:', data);
+      const templateVars = {};
+
+      data.forEach(elem => {
+        templateVars[elem.id] = elem;
+      });
+
+      console.log('templateVars :', templateVars);
+      res.render('index');
+    })
+    .catch(e => {
+      console.error(e);
+      res.send(e);
+    });
+  });
 
   // Menu order page
   router.get('/order', (req, res) => {
