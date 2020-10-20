@@ -71,16 +71,25 @@ module.exports = db => {
   };
 
   const updateOrder = (orderId, status) => {
-    // add ifs to check status and determine which time to update in query
-    // i.e.
-    // status = accepted ? accepted_at = NOW()
-    // status = ready ? ready_at = NOW()
+    let queryString = 'UPDATE orders ';
 
-    return db.query(`
-      UPDATE orders
-      SET status = ${status}, ready_at = NOW()
+    switch (status) {
+      case 'accepted':
+        queryString += "SET status = 'accepted', accepted_at = NOW()"
+        break;
+      case 'ready':
+        queryString += "SET status = 'ready', ready_at = NOW()"
+        break;
+      case 'completed':
+        queryString += "SET status = 'completed', completed_at = NOW()"
+        break;
+    }
+
+    queryString += `
       WHERE id = ${orderId};
-    `)
+    `;
+
+    return db.query(queryString)
     .then(res => {
       return res.rows;
     })
