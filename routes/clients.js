@@ -56,7 +56,6 @@ module.exports = (dbHelpers) => {
 
   // POST an order
   router.post('/order', (req, res) => {
-
     const menuItems = function (items) {
       let result = {}
       for (key in items) {
@@ -72,8 +71,21 @@ module.exports = (dbHelpers) => {
       menuItems: menuItems(req.body)
     };
 
-    dbHelpers.addOrder(order)
-    .then(data => {
+    // Twilio SMS set up
+    const accountSid = process.env.TWILIO_ACCOUNT_SID;
+    const authToken = process.env.TWILIO_ATTH_TOKEN;
+    const sms = require('twilio')(accountSid, authToken);
+
+    const addOrderPromise = dbHelpers.addOrder(order);
+    const sendSMSPromise = sms.messages.create({
+      body: 'Hey staffer, you have a new order pending acceptance. Please refresh your page.',
+      from: '+14172724534',
+      to: '+16047672195'
+    });
+
+    Promise.all([addOrderPromise, sendSMSPromise])
+    .then(message => {
+      console.log(message);
       res.redirect('/client');
     })
     .catch(e => {
