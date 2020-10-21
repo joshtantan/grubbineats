@@ -13,6 +13,8 @@ module.exports = (dbHelpers) => {
       const inactive_orders_data = orders_data[0];
       const active_orders_data = orders_data[1];
       const pageVars = {inactive_orders_data, active_orders_data};
+      console.log ("This is inactive orders: ", inactive_orders_data)
+      console.log ("This is active orders: ", active_orders_data)
       res.render('index', pageVars);
     })
     .catch(e => {
@@ -75,7 +77,7 @@ module.exports = (dbHelpers) => {
   });
 
 
-  
+
 
   return router;
 };

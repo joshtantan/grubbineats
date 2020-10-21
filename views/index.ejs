@@ -27,20 +27,26 @@
         <tr>
           <th>Order Number</th>
           <th>Order Placed Time</th>
-          <th>Time Completed</th>
           <th>Order Status</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
+
+        <% for (let active_order of active_orders_data) {    %>
+
+          <tr>
 
 
-          <td>001</td>
-          <td>12:00</td>
-          <td>12:30</td>
-          <td>pending</td>
+            <td> <a href="/client/order/<%= active_order['id'] %>"> <button> <%= active_order['id'] %>  </button></a></td>
+            <td> <%= moment(active_order['created_at']).format('MMMM Do YYYY, h:mm:ss a')  %></td>
 
-        </tr>
+            <td> <%= active_order['status'] %></td>
+
+          </tr>
+
+          <%}%>
+
+
 
       </tbody>
     </table>
@@ -51,25 +57,23 @@
         <tr>
           <th>Order Number</th>
           <th>Order Placed Time</th>
-          <th>Time Completed</th>
           <th>Order Status</th>
         </tr>
       </thead>
       <tbody>
-        
-        <tr>
+        <% for (let past_order of inactive_orders_data) {    %>
 
-          
+          <tr>
 
-          <td>002</td>
-          <td>6:00</td>
-          <td>6:30</td>
-          <td>completed</td>
 
-        </tr>
-        
-        <tr></tr>
-        <tr></tr>
+            <td> <a href="/client/order/<%= past_order['id'] %>"> <button> <%= past_order['id'] %>  </button></a></td>
+            <td> <%= moment(past_order['created_at']).format('MMMM Do YYYY, h:mm:ss a')  %></td>
+            <td> <%= past_order['status'] %></td>
+
+          </tr>
+
+          <%}%>
+
       </tbody>
     </table>
   </body>
