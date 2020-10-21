@@ -17,7 +17,7 @@
     <%- include('partials/_nav') %>
     <h2>Hello user</h1>
     <!-- button to order -->
-    <form method = "GET" action = "/clients/order">
+    <form method = "GET" action = "/client/order">
       <button type = "submit"> Place An Order </button>
     </form>
     <!-- active orders tables -->
@@ -33,10 +33,15 @@
       </thead>
       <tbody>
         <tr>
-          <td><a href="/staff/order/001"> <button> 001 </button></a></td>
+
+
+          <td>001</td>
+          <td>12:00</td>
+          <td>12:30</td>
+          <td>pending</td>
+
         </tr>
-        <tr></tr>
-        <tr></tr>
+
       </tbody>
     </table>
     <!-- past orders tables -->
@@ -53,7 +58,14 @@
       <tbody>
         
         <tr>
-          <a href="/staff/order/<%= order[obj]['id'] %>"> <button> <%= order[obj]['id'] %>  </button></a>
+
+          
+
+          <td>002</td>
+          <td>6:00</td>
+          <td>6:30</td>
+          <td>completed</td>
+
         </tr>
         
         <tr></tr>

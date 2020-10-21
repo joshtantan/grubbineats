@@ -26,17 +26,15 @@ module.exports = db => {
     });
   };
 
-  const getOrderDetails = (orderId = 1) => {
+  const getOrderDetails = (orderId) => {
     return db.query(`
       SELECT orders.id, url_photo, item_name, description, quantity, price_cents
       FROM orders
       JOIN menu_orders ON orders.id = menu_orders.order_id
       JOIN menu ON menu.id = menu_orders.menu_id
-      WHERE orders.id = 1;
+      WHERE orders.id = ${orderId};
     `)
-    .then(res => {
-      return res.rows;
-    })
+    .then(res => res.rows)
     .catch(e => {
       console.error(e);
       res.status(500);
@@ -73,16 +71,25 @@ module.exports = db => {
   };
 
   const updateOrder = (orderId, status) => {
-    // add ifs to check status and determine which time to update in query
-    // i.e.
-    // status = accepted ? accepted_at = NOW()
-    // status = ready ? ready_at = NOW()
+    let queryString = 'UPDATE orders ';
 
-    return db.query(`
-      UPDATE orders
-      SET status = ${status}, ready_at = NOW()
+    switch (status) {
+      case 'accepted':
+        queryString += "SET status = 'accepted', accepted_at = NOW()"
+        break;
+      case 'ready':
+        queryString += "SET status = 'ready', ready_at = NOW()"
+        break;
+      case 'completed':
+        queryString += "SET status = 'completed', completed_at = NOW()"
+        break;
+    }
+
+    queryString += `
       WHERE id = ${orderId};
-    `)
+    `;
+
+    return db.query(queryString)
     .then(res => {
       return res.rows;
     })
@@ -93,14 +100,43 @@ module.exports = db => {
     });
   };
 
-  // @TODO
-  // const addOrder = () => {
-  //   // must use several statements in order of FK dependence for each table
-  //   // i.e.
-  //   // 1. INSERT INTO orders (with client_id already in database)
-  //   //   a. Research how to use RETURNING within [1] to get new order_id back
-  //   // 2. INSERT INTO menu_orders (with order_id)
-  // }
+  const addOrder = (order) => {
+    const client_id = order.clientId;
+    const menu_items = order.menuItems;
+
+    const ordersTblQuery = `
+      INSERT INTO orders (client_id, status, created_at)
+      VALUES (${client_id}, 'created', NOW())
+      RETURNING id;
+    `;
+
+    return db.query(ordersTblQuery)
+    .then(res => {
+      const order_id = res.rows[0].id;
+      return order_id;
+    })
+    .then(order_id => {
+      const insertPromises = [];
+
+      for (const menu_item_id in menu_items) {
+        const quantity = menu_items[menu_item_id];
+
+        const insertPromise = db.query(`
+          INSERT INTO menu_orders (order_id, menu_id, quantity)
+          VALUES (${order_id}, ${menu_item_id}, ${quantity});
+        `);
+
+        insertPromises.push(insertPromise);
+      }
+
+      return Promise.all(insertPromises);
+    })
+    .catch(e => {
+      console.error(e);
+      res.status(500);
+      res.send(e);
+    });
+  }
 
   return {
     getOrders,
@@ -108,6 +144,7 @@ module.exports = db => {
     getOrderDetails,
     getActiveOrders,
     getInactiveOrders,
-    updateOrder
+    updateOrder,
+    addOrder
   }
 }

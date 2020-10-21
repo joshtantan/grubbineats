@@ -37,14 +37,9 @@
     - place server.js inside
     - place helpers.js inside /server/lib
 - rename styles (sass folder in root) to sass
-- capitalize PSQL command keywords in db/seeds/02_menu.sql
-- Remove unnecessary comments and test code
 
 ## MEMBER DISCUSSION
-- Any issues with past work?
-  - Avvai: 
-  - Ayushi: 
 - What are you working on today?
-  - Avvai: 
-  - Ayushi: 
-  - Josh: sync up and merge Ayushi's BE code with master, refactoring, POST routes
+  - Avvai: FE page elements, styling
+  - Ayushi: client individual order page, merge with master
+  - Josh: refactoring, GET/POST routes

@@ -4,16 +4,20 @@ const router  = express.Router();
 module.exports = (dbHelpers) => {
   // Dashboard page
   router.get('/', (req, res) => {
-    dbHelpers.getInactiveOrders()
-    .then(data => {
-      console.log('data :', data);
-      // data = array of order objects to be used in .ejs
-      // res.render('index', data);
-      // @TODO add another promise for getActiveOrders()
-      res.render('index');
+    const inactiveOrderPromise = dbHelpers.getInactiveOrders();
+    const activeOrderPromise = dbHelpers.getActiveOrders();
+
+    Promise.all([inactiveOrderPromise, activeOrderPromise])
+    .then(orders_data => {
+      console.log('orders_data:', orders_data);
+      const inactive_orders_data = orders_data[0];
+      const active_orders_data = orders_data[1];
+      const pageVars = {inactive_orders_data, active_orders_data};
+      res.render('index', pageVars);
     })
     .catch(e => {
       console.error(e);
+      res.status(500);
       res.send(e);
     });
   });
@@ -21,49 +25,54 @@ module.exports = (dbHelpers) => {
   // Menu order page
   router.get('/order', (req, res) => {
     dbHelpers.getMenu()
-    .then(data => {
-      console.log('data :', data);
-      // data = array of menu objects to be used in .ejs
-      // res.render('client-order', data);
-      res.render('client-order');
+    .then(menu_data => {
+      const pageVars = {menu_data};
+      res.render('client-order', pageVars);
     })
     .catch(e => {
       console.error(e);
+      res.status(500);
       res.send(e);
     });
   });
-    // res.render("client-order");
-  // });
 
   // Individual order page
   router.get('/order/:id', (req, res) => {
-    dbHelpers.getMenu()
+    const orderId = req.params.id;
+
+    dbHelpers.getOrderDetails(orderId)
+    .then(order_data => {
+      const pageVars = {order_data};
+      res.render('client-order-id', pageVars);
+    })
+    .catch(e => {
+      console.error(e);
+      res.status(500);
+      res.send(e);
+    });
+  });
+
+  // POST an order
+  router.post('/order', (req, res) => {
+    // @TODO REPLACE PROPERTIES WITH DATA FROM client-order.ejs
+    const order = {
+      clientId: 1,
+      menuItems: {
+        1: 2,
+        2: 1,
+        3: 3
+      }
+    };
+
+    dbHelpers.addOrder(order)
     .then(data => {
-      console.log('data :', data);
-      // data = array of menu objects to be used in .ejs
-      // res.render('client-order-id', data);
-      res.render('client-order-id');
+      res.redirect('/client');
     })
     .catch(e => {
       console.error(e);
       res.send(e);
     });
   });
-
-  // // POST an order
-  // router.post('/order/:id', (req, res) => {
-  //   // Extract order information from .ejs input forms
-  //   // Pass appropriate variables into addOrder() below
-  //   dbHelpers.addOrder()
-  //   .then(() => {
-  //     console.log('Finished POST route. Redirecting back to dash'); // @TODELETE
-  //     res.redirect('/client');
-  //   })
-  //   .catch(e => {
-  //     console.error(e);
-  //     res.send(e);
-  //   });
-  // });
 
 
   
