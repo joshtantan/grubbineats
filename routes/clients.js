@@ -52,20 +52,27 @@ module.exports = (dbHelpers) => {
     });
   });
 
-  // // POST an order
-  // router.post('/order/:id', (req, res) => {
-  //   // Extract order information from .ejs input forms
-  //   // Pass appropriate variables into addOrder() below
-  //   dbHelpers.addOrder()
-  //   .then(() => {
-  //     console.log('Finished POST route. Redirecting back to dash'); // @TODELETE
-  //     res.redirect('/client');
-  //   })
-  //   .catch(e => {
-  //     console.error(e);
-  //     res.send(e);
-  //   });
-  // });
+  // POST an order
+  router.post('/order', (req, res) => {
+    // @TODO REPLACE PROPERTIES WITH DATA FROM client-order.ejs
+    const order = {
+      clientId: 1,
+      menuItems: {
+        1: 2,
+        2: 1,
+        3: 3
+      }
+    };
+
+    dbHelpers.addOrder(order)
+    .then(data => {
+      res.redirect('/client');
+    })
+    .catch(e => {
+      console.error(e);
+      res.send(e);
+    });
+  });
 
   return router;
 };

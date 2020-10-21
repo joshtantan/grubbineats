@@ -100,15 +100,44 @@ module.exports = db => {
     });
   };
 
-  // @TODO
-  // const addOrder = () => {
-  //   // must use several statements in order of FK dependence for each table
-  //   // i.e.
-  //   // 1. INSERT INTO orders (with client_id already in database)
-  //   //   a. Research how to use RETURNING within [1] to get new order_id back
-  //   // 2. INSERT INTO menu_orders (with order_id) for each item (with quantity)
-  //   // 3. Repeat Step 2 until each menu item is added
-  // }
+  const addOrder = (order) => {
+    const client_id = order.clientId;
+    const menu_items = order.menuItems;
+    const number_of_items = Object.keys(menu_items).length;
+
+    const ordersTblQuery = `
+      INSERT INTO orders (client_id, status, created_at)
+      VALUES(${client_id}, 'created', NOW())
+      RETURNING id;
+    `;
+
+    return db.query(ordersTblQuery)
+    .then(res => {
+      const order_id = res.rows[0].id;
+      return order_id;
+    })
+    .then(order_id => {
+      const promises = [];
+
+      for (const menu_item_id in menu_items) {
+        const quantity = menu_items[menu_item_id];
+
+        const promise = db.query(`
+          INSERT INTO menu_orders (order_id, menu_id, quantity)
+          VALUES(${order_id}, ${menu_item_id}, ${quantity});
+        `);
+
+        promises.push(promise);
+      }
+
+      return Promise.all(promises);
+    })
+    .catch(e => {
+      console.error(e);
+      res.status(500);
+      res.send(e);
+    });
+  }
 
   return {
     getOrders,
@@ -116,6 +145,7 @@ module.exports = db => {
     getOrderDetails,
     getActiveOrders,
     getInactiveOrders,
-    updateOrder
+    updateOrder,
+    addOrder
   }
 }
