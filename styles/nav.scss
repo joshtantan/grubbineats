@@ -1,11 +1,23 @@
+// header {
+//   display: flex;
+//   flex-direction: row;
+//   align-items: center;
+// }
+
 nav {
-  background-color: #FB9353;
-  height: 80px;
-  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: #5196A6;
+  height: 90px;
+  width: 100%;
+  // padding-top: 15px;
+  padding-left: 20px;
 
   #nav-brand {
     font-family: "Patua One";
-    font-size: 20px;
+    font-size: 40px;
+    padding-left: 15px;
   }
 
 }

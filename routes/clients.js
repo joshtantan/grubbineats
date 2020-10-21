@@ -21,19 +21,15 @@ module.exports = (dbHelpers) => {
   // Menu order page
   router.get('/order', (req, res) => {
     dbHelpers.getMenu()
-    .then(data => {
-      console.log('data :', data);
-      // data = array of menu objects to be used in .ejs
-      // res.render('client-order', data);
-      res.render('client-order');
+    .then(menu => {
+      const templateVars = {menu_data: menu};
+      res.render("client-order", templateVars);
     })
     .catch(e => {
       console.error(e);
       res.send(e);
     });
   });
-    // res.render("client-order");
-  // });
 
   // Individual order page
   router.get('/order/:id', (req, res) => {

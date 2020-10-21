@@ -1,5 +1,23 @@
+.outer-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 75px;
+}
+
+h2 {
+  font-size: 45px;
+  margin-bottom: 10px;
+}
+
 button {
-  background-color: orange;
+  background-color: #F2955E;
+  border: none;
+  border-radius: 8px;
+  padding: 15px 30px;
+  text-align: center;
+  font-size: 20px;
 }
 
 #active-orders-table {
