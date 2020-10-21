@@ -117,20 +117,20 @@ module.exports = db => {
       return order_id;
     })
     .then(order_id => {
-      const promises = [];
+      const insertPromises = [];
 
       for (const menu_item_id in menu_items) {
         const quantity = menu_items[menu_item_id];
 
-        const promise = db.query(`
+        const insertPromise = db.query(`
           INSERT INTO menu_orders (order_id, menu_id, quantity)
           VALUES(${order_id}, ${menu_item_id}, ${quantity});
         `);
 
-        promises.push(promise);
+        insertPromises.push(insertPromise);
       }
 
-      return Promise.all(promises);
+      return Promise.all(insertPromises);
     })
     .catch(e => {
       console.error(e);
