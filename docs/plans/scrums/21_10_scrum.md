@@ -4,6 +4,8 @@
 3. must verify one full successful test run of an order from creation to completion
   - must add new properties to db schema
 4. must get styling and spacing at a presentable level
+5. Twilio for client 
+  - after placing order, send text to restaurant
 
 ## TECH DEBT (BY EOD)
 1. research and implement Heroku
@@ -19,14 +21,14 @@
     - place helpers.js inside /server/lib
 2. rename styles (sass folder in root) to sass
 
+## SEEDS
+1. standardize image sizes of data
+
 ## STRETCH
 1. implement login/logout for multiple customers
 
 ## MEMBER DISCUSSION
-- Anything about yesterday's work to bring forward?
-  - Avvai:
-  - Ayushi: 
 - What are you working on today?
-  - Avvai: 
-  - Ayushi: 
-  - Josh:
+  - Avvai: C1, C4, S1
+  - Ayushi: C2, T1
+  - Josh: C5, T1, R1, R2
