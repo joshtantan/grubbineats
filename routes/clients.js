@@ -56,14 +56,20 @@ module.exports = (dbHelpers) => {
 
   // POST an order
   router.post('/order', (req, res) => {
-    // @TODO REPLACE PROPERTIES WITH DATA FROM client-order.ejs
+
+    const menuItems = function (items) {
+      let result = {}
+      for (key in items) {
+        if (parseInt(items[key]) !== 0) {
+          result[key] = items[key]
+        }
+      }
+      return result
+    }
+
     const order = {
       clientId: 1,
-      menuItems: {
-        1: 2,
-        2: 1,
-        3: 3
-      }
+      menuItems: menuItems(req.body)
     };
 
     dbHelpers.addOrder(order)

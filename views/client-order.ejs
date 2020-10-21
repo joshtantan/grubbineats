@@ -24,7 +24,8 @@
     <!-- button to order -->
     <form method = "POST" action = "/client/order">
     <button type = "submit"> Send Order </button>
-    </form>
+    <!-- <input type="hidden" name = "clientId" value = "1"> -->
+
 
     <% for (const menu_item of menu_data) { %>
     <div id = "menu">
@@ -48,14 +49,14 @@
         </div>
 
         <div class = "quantity-input">
-          <input class="dish-counter" id= "<%= menu_item['price_cents']/100 %>" type="number" min="0" max ="50" value="0">
+          <input name = "<%= menu_item['id'] %>" class="dish-counter" id= "<%= menu_item['price_cents']/100 %>" type="number" min="0" max ="50" value="0">
         </div>
 
       </div>
     </div>
 
     <% } %>
-
+  </form>
 
     <script type = "text/javascript">
       $(document).ready(function() {
