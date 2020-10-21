@@ -9,7 +9,7 @@ module.exports = (dbHelpers) => {
 
     Promise.all([inactiveOrderPromise, activeOrderPromise])
     .then(orders_data => {
-      console.log('orders_data:', orders_data);
+      console.log('orders_data:', orders_data); // @TODELETE
       const inactive_orders_data = orders_data[0];
       const active_orders_data = orders_data[1];
       const pageVars = {inactive_orders_data, active_orders_data};
@@ -73,9 +73,6 @@ module.exports = (dbHelpers) => {
       res.send(e);
     });
   });
-
-
-  
 
   return router;
 };

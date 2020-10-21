@@ -15,6 +15,11 @@ const dbParams = require('./lib/db.js');
 const db = new Pool(dbParams);
 db.connect();
 
+app.set("view engine", "ejs");
+app.use(morgan('dev'));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static('public'));
+
 // Moment API to display time and date in 'MMMM Do YYYY, h:mm:ss a' format
 const moment = require("moment");
 
@@ -22,11 +27,6 @@ app.use((req, res, next) => {
   res.locals.moment = moment;
   next();
 });
-
-app.set("view engine", "ejs");
-app.use(morgan('dev'));
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static('public'));
 
 app.use('/styles', sass({
   src: __dirname + '/styles',

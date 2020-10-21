@@ -32,8 +32,8 @@ module.exports = db => {
       FROM orders
       JOIN menu_orders ON orders.id = menu_orders.order_id
       JOIN menu ON menu.id = menu_orders.menu_id
-      WHERE orders.id = ${orderId};
-    `)
+      WHERE orders.id = $1;
+    `, [orderId])
     .then(res => res.rows)
     .catch(e => {
       console.error(e);
@@ -86,10 +86,10 @@ module.exports = db => {
     }
 
     queryString += `
-      WHERE id = ${orderId};
+      WHERE id = $1;
     `;
 
-    return db.query(queryString)
+    return db.query(queryString, [orderId])
     .then(res => {
       return res.rows;
     })
@@ -106,11 +106,11 @@ module.exports = db => {
 
     const ordersTblQuery = `
       INSERT INTO orders (client_id, status, created_at)
-      VALUES (${client_id}, 'created', NOW())
+      VALUES ($1, 'created', NOW())
       RETURNING id;
     `;
 
-    return db.query(ordersTblQuery)
+    return db.query(ordersTblQuery, [client_id])
     .then(res => {
       const order_id = res.rows[0].id;
       return order_id;
@@ -123,8 +123,8 @@ module.exports = db => {
 
         const insertPromise = db.query(`
           INSERT INTO menu_orders (order_id, menu_id, quantity)
-          VALUES (${order_id}, ${menu_item_id}, ${quantity});
-        `);
+          VALUES ($1, $2, $3);
+        `, [order_id, menu_item_id, quantity]);
 
         insertPromises.push(insertPromise);
       }
