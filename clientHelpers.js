@@ -103,7 +103,6 @@ module.exports = db => {
   const addOrder = (order) => {
     const client_id = order.clientId;
     const menu_items = order.menuItems;
-    const number_of_items = Object.keys(menu_items).length;
 
     const ordersTblQuery = `
       INSERT INTO orders (client_id, status, created_at)
