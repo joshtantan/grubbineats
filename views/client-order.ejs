@@ -17,17 +17,11 @@
     <%- include('partials/_nav') %>
     <h2>Place your order here: </h2>
 
-    <h2> Your Total </h2>
-    <p id="total-price">$0.00</p>
+    <div class = "outer-box">
 
-
-    <!-- button to order -->
-    <form method = "POST" action = "/">
-    <button type = "submit"> Send Order </button>
-    </form>
-
-    <% for (let obj in menu_data) { %>
     <div id = "menu">
+
+      <% for (let obj in menu_data) { %>
       <div class = "menu-row">
 
         <div class = "menu-image">
@@ -48,10 +42,8 @@
         </div>
 
       </div>
+      <% } %>
     </div>
-
-    <% } %>
-
 
     <script type = "text/javascript">
       $(document).ready(function() {
@@ -69,7 +61,17 @@
       })
     </script>
 
+    <div id = "total-container">
+<h2> Your Total </h2>
+<p id="total-price">$0.00</p>
+<!-- button to order -->
+<form method = "POST" action = "/">
+<button type = "submit"> Send Order </button>
+</form>
+    </div>
 
+
+    </div>
 
   </body>
 </html>
