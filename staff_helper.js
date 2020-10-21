@@ -1,62 +1,74 @@
+// const dbParams = require('./lib/db.js');
+// const {Pool} = require('pg');
+// const pool = new Pool(dbParams);
+
+
 module.exports = (db) => {
   // get all active orders
   const getOrders = () => {
-    return db.query(`SELECT id,status,created_at FROM orders WHERE status <> 'completed'`)
+
+    const query_string = `
+    SELECT id,status,created_at
+    FROM orders 
+    WHERE status <> 'completed'
+    `;
+
+    return db.query(query_string)
     .then((res) => {
-      
       return res.rows;
-    })
-    .catch(e => {
-      console.error(e);
-      res.status(500);
-      res.send(e);
     });
   };
 
   // get all past orders
   const getPastOrders = () => {
-    return db.query(`SELECT id,status,created_at FROM orders WHERE status like '%completed%'`)
+
+    const query_string = `
+    SELECT id,status,created_at
+    FROM orders 
+    WHERE status LIKE '%completed%'
+    `;
+
+    return db.query(query_string)
     .then((res) => {
-      
       return res.rows;
-    })
-    .catch(e => {
-      console.error(e);
-      res.status(500);
-      res.send(e);
     });
+    
   };
 
   // update order with ready time
-  const updateOrder = (orderid, readytime) => {
-    return db.query(`UPDATE orders SET status = 'workinprogress', ready_at = ${readytime}  WHERE id = ${orderid}`)
+  const updateOrder = (order_id, ready_time) => {
+
+    const values = [order_id, ready_time];
+    const query_string = `
+    UPDATE orders
+    SET status = 'workinprogress', ready_at = $2  
+    WHERE id = $1
+    `;
+
+    return db.query(query_string, values)
     .then (res => {
-      console.log("from query", res.rows);
       return res.rows;
-    })
-    .catch(e => {
-      console.error(e);
-      res.status(500);
-      res.send(e);
     });
+    
   };
 
   // get order details
-  const orderDetails = (orderid) => {
-    return db.query(`select url_photo, item_name , description, price_cents, menu_orders.order_id, menu_orders.quantity, orders.created_at 
+  const orderDetails = (order_id) => {
+
+    const values = [order_id];
+    const query_string = `
+    select url_photo, item_name , description, price_cents, menu_orders.order_id, menu_orders.quantity, orders.created_at 
     FROM menu 
     JOIN menu_orders ON menu.id = menu_orders.menu_id
     JOIN orders ON orders.id = menu_orders.order_id
-    WHERE orders.id = ${orderid}
-    `)
+    WHERE orders.id = $1
+    `;
+
+    return db.query(query_string, values)
     .then (res => {
       return res.rows;
-    })
-    .catch(e => {
-      console.error(e);
-      res.status(500);
-      res.send(e);
     });
+    
   };
 
   

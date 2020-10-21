@@ -23,7 +23,7 @@
       <input type="text" name = "order_id">
 
       <label for = "completion-time">Enter the completion time: </label>
-      <input type="text" name = "completion_time">
+      <input type="text" name = "completion_time" placeholder="example:- 3:30">
 
       <button type = "submit" > Accept Order </button>
     </form>
@@ -47,7 +47,6 @@
             <tr>
               <td> <a href="/staff/order/<%= order[obj]['id'] %>"> <button> <%= order[obj]['id'] %>  </button></a></td>
               <td> <%= moment(order[obj]['created_at']).format('MMMM Do YYYY, h:mm:ss a')  %></td> 
-              
               <td> <%= order[obj]['status'] %></td>
             </tr>
 

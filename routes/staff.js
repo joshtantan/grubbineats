@@ -13,18 +13,19 @@ module.exports = (helper) => {
   router.get('/', (req, res) => {
   
     
+
     // called active orders function helper
     helper.getOrders()
     .then(orders => {
       
-      let returnobj = {'order': orders};
+      let returnObj = {'order': orders};
       
       //called past orders function helper
       helper.getPastOrders()
-      .then(pastorders => {
+      .then(pastOrders => {
       
-        returnobj['pastorder'] = pastorders;
-        res.render('staff',returnobj);
+        returnObj['pastorder'] = pastOrders;
+        res.render('staff',returnObj);
       
       });
     })
@@ -38,11 +39,19 @@ module.exports = (helper) => {
   // post route for staff page -  /staff/
   router.post('/', (req, res) => {
     
-    let orderid = req.body.order_id;
-    let readytime = "'" + req.body.completion_time + "'";
+    let orderId = req.body.order_id;
+    let timeFromStaff = req.body.completion_time;
     
-    // update status and readytime in order table
-    helper.updateOrder(orderid, readytime);
+    
+    // get todays date
+    let todayDate = moment().format('L');
+
+    // combine todayDate and timeFromStaff to have readyTime in timestamp format
+    let readyTime = "'"+todayDate +" "+ timeFromStaff + "'";
+    console.log("combined time is ", readyTime);
+
+    // update status and timeFromStaff in order table
+    helper.updateOrder(orderId, readyTime);
 
     // redirecting to staff
     res.redirect('/staff/');
@@ -54,7 +63,7 @@ module.exports = (helper) => {
     
     const client = require('twilio')(accountSid, autheToken);
     client.messages.create({
-      body: 'Your order will be ready at ' + readytime,
+      body: 'Your order will be ready at ' + readyTime,
       from:'+13137778807',
       to:'+15875748681'
     })
@@ -68,9 +77,9 @@ module.exports = (helper) => {
   // order detail route -  /staff/order/id 
   router.get("/order/:id", (req, res) => {
 
-    let orderid = req.params.id;
-    console.log(req.params.id);
-    helper.orderDetails(orderid)
+    let orderId = req.params.id;
+    
+    helper.orderDetails(orderId)
     .then(details => {
       let detailObject = {detail: details};
       
