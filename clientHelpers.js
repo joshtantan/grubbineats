@@ -107,7 +107,7 @@ module.exports = db => {
 
     const ordersTblQuery = `
       INSERT INTO orders (client_id, status, created_at)
-      VALUES(${client_id}, 'created', NOW())
+      VALUES (${client_id}, 'created', NOW())
       RETURNING id;
     `;
 
@@ -124,7 +124,7 @@ module.exports = db => {
 
         const insertPromise = db.query(`
           INSERT INTO menu_orders (order_id, menu_id, quantity)
-          VALUES(${order_id}, ${menu_item_id}, ${quantity});
+          VALUES (${order_id}, ${menu_item_id}, ${quantity});
         `);
 
         insertPromises.push(insertPromise);
