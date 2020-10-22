@@ -13,21 +13,21 @@ module.exports = (helper) => {
   router.get('/', (req, res) => {
   
     
-
+    helper.updateStatusToCompletedOrder();
     // called active orders function helper
-    helper.getOrders()
-    .then(orders => {
+    helper.getActiveOrders()
+      .then(orders => {
       
-      let returnObj = {'order': orders};
+        let returnObj = {'order': orders};
+        
+        //called past orders function helper
+        helper.getInactiveOrders()
+        .then(pastOrders => {
       
-      //called past orders function helper
-      helper.getPastOrders()
-      .then(pastOrders => {
-      
-        returnObj['pastorder'] = pastOrders;
-        res.render('staff',returnObj);
-      
-      });
+          returnObj['pastorder'] = pastOrders;
+          res.render('staff',returnObj);
+        
+        });
     })
     .catch(e => {
       console.log(e);
@@ -40,18 +40,20 @@ module.exports = (helper) => {
   router.post('/', (req, res) => {
     
     let orderId = req.body.order_id;
+
+    //get length from user
     let timeFromStaff = req.body.completion_time;
     
     
-    // get todays date
-    let todayDate = moment().format('L');
 
-    // combine todayDate and timeFromStaff to have readyTime in timestamp format
-    let readyTime = "'"+todayDate +" "+ timeFromStaff + "'";
-    console.log("combined time is ", readyTime);
+    // chnage length in timestamp using current date 
+    let timeLength = Number(timeFromStaff);
+    let myDate = new Date();
+    var newDateObj = moment(myDate).add(timeLength, 'm').toDate();
+   
 
     // update status and timeFromStaff in order table
-    helper.updateOrder(orderId, readyTime);
+    helper.updateStatusToAcceptedOrder(orderId, newDateObj);
 
     // redirecting to staff
     res.redirect('/staff/');
@@ -63,7 +65,7 @@ module.exports = (helper) => {
     
     const client = require('twilio')(accountSid, autheToken);
     client.messages.create({
-      body: 'Your order will be ready at ' + readyTime,
+      body: 'Your order will be ready at' + newDateObj,
       from:'+13137778807',
       to:'+15875748681'
     })
@@ -79,7 +81,7 @@ module.exports = (helper) => {
 
     let orderId = req.params.id;
     
-    helper.orderDetails(orderId)
+    helper.getOrderDetails(orderId)
     .then(details => {
       let detailObject = {detail: details};
       

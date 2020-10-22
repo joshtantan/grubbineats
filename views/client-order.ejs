@@ -22,15 +22,13 @@
         <p id="total-price">$0.00</p>
 
         <!-- button to order -->
-        <form method = "POST" action = "/">
+        <form method = "POST" action = "/client/order">
         <button type = "submit"> Send Order </button>
     <!-- <input type="hidden" name = "clientId" value = "1"> -->
 
 
     <% for (const menu_item of menu_data) { %>
     <div id = "menu">
-
-      <% for (let obj in menu_data) { %>
       <div class = "menu-row">
 
         <div class = "menu_id">
