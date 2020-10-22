@@ -36,8 +36,8 @@ app.use('/styles', sass({
 }));
 
 // Attach helpers to query db
-const clientHelpers = require('./clientHelpers.js')(db);
-const staffHelpers = require('./staff_helper')(db);
+const clientHelpers = require('./helper_functions.js')(db);
+const staffHelpers = require('./helper_functions.js')(db);
 const clientRoutes = require('./routes/clients')(clientHelpers);
 const staffRoutes = require('./routes/staff')(staffHelpers);
 
