@@ -69,7 +69,7 @@ module.exports = (helper) => {
       to: '+16047672195'
     })
     .then(message => {
-      console.log('SMS sent:', message.body);
+      console.log(message.body); // Show Twilio log
       res.redirect('/staff');
     })
     .catch(e => {

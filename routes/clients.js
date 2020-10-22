@@ -85,7 +85,7 @@ module.exports = (dbHelpers) => {
 
     Promise.all([addOrderPromise, sendSMSPromise])
     .then(response => {
-      console.log('Twilio SMS log:', response[1].body);
+      console.log(response[1].body); // Show Twilio log
       res.redirect('/client');
     })
     .catch(e => {
