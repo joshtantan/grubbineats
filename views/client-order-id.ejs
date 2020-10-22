@@ -19,19 +19,16 @@
 
     <div class = "single-order-container">
       <p>
-        Order Number: <%= order_item[0]['order_id'] %> </br>
-        Order Date: <%= moment(order_item[0]['created_at']).format('MMM Do YYYY, h:mm:ss a')  %>
+        Order Number: <%= order_data[0]['order_id'] %> </br>
+        Order Date: <%= moment(order_data[0]['created_at']).format('MMM Do YYYY, h:mm:ss a')  %>
       </p>
     </div>
-    
-  
 
-    <% for (let order_item of order_data) { %>
 
 
       <table id= "active-orders-table">
         <thead>
-          
+
           <tr>
             <th>image</th>
             <th>items</th>
@@ -41,8 +38,8 @@
         </thead>
         <tbody>
 
-          
-          <% for (let obj in detail) { %>
+
+          <% for (let order_item of order_data) { %>
 
 
 
@@ -55,19 +52,19 @@
                 <td> <%= order_item['price_cents'] %></td>
               </tr>
 
-          
-           <% } %>
-          
-  
 
-       
+           <% } %>
+
+
+
+
 
 
 
         </tbody>
       </table>
-      
-    
+
+
 
     <form method = "GET" action = "/">
       <button type = "submit"> Go back to orders</button>
