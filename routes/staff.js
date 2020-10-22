@@ -66,7 +66,7 @@ module.exports = (helper) => {
     client.messages.create({
       body: 'Hey user, your order will be ready at: ' + newDateObj,
       from: '+14172724534',
-      to: '+16047672195'
+      to: '+15875748681'
     })
     .then(message => {
       console.log(message.body); // Show Twilio log
