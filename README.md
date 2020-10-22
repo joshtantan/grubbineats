@@ -5,11 +5,21 @@ GrubbinEats is a web application designed to allow its customers to place orders
 ## Final Product
 
 
+
+
 ## Dependencies
 
 - Node.js
-- Body-Parser
 - Express
+- EJS
+- Twilio
+- Body-Parser
+- Dotenv
+- PG
+- Moment
+- Morgan
+- Chalk
+- Node SASS middleware
 
 ## Getting Started
 
