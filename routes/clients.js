@@ -4,17 +4,21 @@ const router  = express.Router();
 module.exports = (dbHelpers) => {
   // Dashboard page
   router.get('/', (req, res) => {
-    const inactiveOrderPromise = dbHelpers.getInactiveOrders();
-    const activeOrderPromise = dbHelpers.getActiveOrders();
+    dbHelpers.updatePastReadyOrdersToComplete()
+    .then(() => {
+      console.log('here');
+      const inactiveOrderPromise = dbHelpers.getInactiveOrders();
+      const activeOrderPromise = dbHelpers.getActiveOrders();
 
-    Promise.all([inactiveOrderPromise, activeOrderPromise])
+      console.log('here');
+      return Promise.all([inactiveOrderPromise, activeOrderPromise])
+    })
     .then(orders_data => {
-      console.log('orders_data:', orders_data); // @TODELETE
       const inactive_orders_data = orders_data[0];
       const active_orders_data = orders_data[1];
       const pageVars = {inactive_orders_data, active_orders_data};
-      console.log ("This is inactive orders: ", inactive_orders_data)
-      console.log ("This is active orders: ", active_orders_data)
+      console.log ("Inactive orders: ", inactive_orders_data)
+      console.log ("Active orders: ", active_orders_data)
       res.render('index', pageVars);
     })
     .catch(e => {

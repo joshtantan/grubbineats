@@ -1,7 +1,6 @@
 module.exports = (db) => {
   // get all active orders - Ayushi + Josh
   const getActiveOrders = () => {
-
     const query_string = `
       SELECT id, status, created_at
       FROM orders
@@ -16,7 +15,6 @@ module.exports = (db) => {
 
   // get all past orders - Ayushi + Josh
   const getInactiveOrders = () => {
-
     const query_string = `
       SELECT id, status, created_at
       FROM orders
@@ -32,8 +30,8 @@ module.exports = (db) => {
 
   // update order with ready time and status Accepted - Ayushi
   const updateOrderStatusToAccepted = (order_id, ready_time) => {
-
     const values = [order_id, ready_time];
+
     const query_string = `
       UPDATE orders
       SET status = 'Accepted', ready_at = $2
@@ -49,7 +47,6 @@ module.exports = (db) => {
 
   // update order status to 'Completed' - Ayushi
   const updatePastReadyOrdersToComplete = () => {
-
     const query_string = `
       UPDATE orders
       SET status = 'Completed'
@@ -67,8 +64,8 @@ module.exports = (db) => {
 
   // get order details - Ayushi + Josh
   const getOrderDetails = (order_id) => {
-
     const values = [order_id];
+
     const query_string = `
       SELECT url_photo, item_name , description, price_cents, menu_orders.order_id, menu_orders.quantity, orders.created_at
       FROM menu
