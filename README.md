@@ -26,3 +26,8 @@ GrubbinEats is a web application designed to allow its customers to place orders
 
 - Install all dependencies (using the `npm i` command while in the project root directory).
 - Run the development web server using the `npm start` command.
+
+## Image Credits
+
+- Grubbin' Eats brand icon created by Luis Prado from Noun Project
+- Website photos by Zamurovic Brothers from Noun Project
