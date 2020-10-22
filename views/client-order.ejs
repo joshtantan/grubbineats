@@ -17,18 +17,20 @@
     <%- include('partials/_nav') %>
     <h2>Place your order here: </h2>
 
-    <h2> Your Total </h2>
-    <p id="total-price">$0.00</p>
 
+        <h2> Your Total </h2>
+        <p id="total-price">$0.00</p>
 
-    <!-- button to order -->
-    <form method = "POST" action = "/client/order">
-    <button type = "submit"> Send Order </button>
+        <!-- button to order -->
+        <form method = "POST" action = "/">
+        <button type = "submit"> Send Order </button>
     <!-- <input type="hidden" name = "clientId" value = "1"> -->
 
 
     <% for (const menu_item of menu_data) { %>
     <div id = "menu">
+
+      <% for (let obj in menu_data) { %>
       <div class = "menu-row">
 
         <div class = "menu_id">
@@ -54,8 +56,7 @@
 
       </div>
     </div>
-
-    <% } %>
+      <% } %>
   </form>
 
     <script type = "text/javascript">

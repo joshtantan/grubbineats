@@ -18,7 +18,6 @@ db.connect();
 app.set("view engine", "ejs");
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static('public'));
 
 // Moment API to display time and date in 'MMMM Do YYYY, h:mm:ss a' format
 const moment = require("moment");
@@ -34,6 +33,8 @@ app.use('/styles', sass({
   debug: true,
   outputStyle: 'expanded'
 }));
+
+app.use(express.static('public'));
 
 // Attach helpers to query db
 const clientHelpers = require('./clientHelpers.js')(db);
