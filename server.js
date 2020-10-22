@@ -1,7 +1,5 @@
-// load .env data into process.env
 require('dotenv').config();
 
-// Web server config
 const PORT       = process.env.PORT || 8080;
 const express    = require('express');
 const app        = express();
@@ -9,7 +7,6 @@ const bodyParser = require('body-parser');
 const morgan     = require('morgan');
 const sass       = require('node-sass-middleware');
 
-// PG database client/connection setup
 const { Pool } = require('pg');
 const dbParams = require('./lib/db.js');
 const db = new Pool(dbParams);

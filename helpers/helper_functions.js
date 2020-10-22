@@ -1,16 +1,10 @@
-// const dbParams = require('./lib/db.js');
-// const {Pool} = require('pg');
-// const pool = new Pool(dbParams);
-
-
 module.exports = (db) => {
-  // get all active orders Ayushi + Josh
+  // get all active orders - Ayushi + Josh
   const getActiveOrders = () => {
-
     const query_string = `
-    SELECT id,status,created_at
-    FROM orders 
-    WHERE status <> 'Completed'
+      SELECT id, status, created_at
+      FROM orders
+      WHERE status <> 'Completed'
     `;
 
     return db.query(query_string)
@@ -19,47 +13,44 @@ module.exports = (db) => {
     });
   };
 
-  // get all past orders Ayuhsi + Josh
+  // get all past orders - Ayushi + Josh
   const getInactiveOrders = () => {
-
     const query_string = `
-    SELECT id,status,created_at
-    FROM orders 
-    WHERE status LIKE '%Completed%'
+      SELECT id, status, created_at
+      FROM orders
+      WHERE status = 'Completed'
     `;
 
     return db.query(query_string)
     .then(res => {
       return res.rows;
     });
-    
+
   };
 
   // update order with ready time and status Accepted - Ayushi
-  const updateStatusToAcceptedOrder = (order_id, ready_time) => {
-
+  const updateOrderStatusToAccepted = (order_id, ready_time) => {
     const values = [order_id, ready_time];
+
     const query_string = `
-    UPDATE orders
-    SET status = 'Accepted', ready_at = $2  
-    WHERE id = $1
+      UPDATE orders
+      SET status = 'Accepted', ready_at = $2
+      WHERE id = $1
     `;
 
     return db.query(query_string, values)
     .then (res => {
       return res.rows;
     });
-    
+
   };
 
-
-  // update order status Completed - Ayushi
-  const updateStatusToCompletedOrder = () => {
-    
+  // update order status to 'Completed' - Ayushi
+  const updatePastReadyOrdersToComplete = () => {
     const query_string = `
-    UPDATE orders
-    SET status = 'Completed' 
-    WHERE ready_at < now()
+      UPDATE orders
+      SET status = 'Completed'
+      WHERE ready_at < now()
     `;
 
     return db.query(query_string)
@@ -71,28 +62,26 @@ module.exports = (db) => {
       })
   };
 
-
-
-  // get order details  Ayushi + Josh
+  // get order details - Ayushi + Josh
   const getOrderDetails = (order_id) => {
-
     const values = [order_id];
+
     const query_string = `
-    select url_photo, item_name , description, price_cents, menu_orders.order_id, menu_orders.quantity, orders.created_at 
-    FROM menu 
-    JOIN menu_orders ON menu.id = menu_orders.menu_id
-    JOIN orders ON orders.id = menu_orders.order_id
-    WHERE orders.id = $1
+      SELECT url_photo, item_name , description, price_cents, menu_orders.order_id, menu_orders.quantity, orders.created_at
+      FROM menu
+      JOIN menu_orders ON menu.id = menu_orders.menu_id
+      JOIN orders ON orders.id = menu_orders.order_id
+      WHERE orders.id = $1
     `;
 
     return db.query(query_string, values)
     .then (res => {
       return res.rows;
     });
-    
+
   };
 
-  // getMenu - Josh
+  // get menu - Josh
   const getMenu = () => {
     return db.query(`
       SELECT *
@@ -106,45 +95,14 @@ module.exports = (db) => {
     });
   };
 
-  // update order - Josh
-  const updateOrder = (orderId, status) => {
-    let queryString = 'UPDATE orders ';
-
-    switch (status) {
-      case 'accepted':
-        queryString += "SET status = 'accepted', accepted_at = NOW()"
-        break;
-      case 'ready':
-        queryString += "SET status = 'ready', ready_at = NOW()"
-        break;
-      case 'completed':
-        queryString += "SET status = 'completed', completed_at = NOW()"
-        break;
-    }
-
-    queryString += `
-      WHERE id = ${orderId};
-    `;
-
-    return db.query(queryString)
-    .then(res => {
-      return res.rows;
-    })
-    .catch(e => {
-      console.error(e);
-      res.status(500);
-      res.send(e);
-    });
-  };
-
-  // addorder - Josh
+  // add an order - Josh
   const addOrder = (order) => {
     const client_id = order.clientId;
     const menu_items = order.menuItems;
 
     const ordersTblQuery = `
       INSERT INTO orders (client_id, status, created_at)
-      VALUES (${client_id}, 'created', NOW())
+      VALUES (${client_id}, 'Pending', NOW())
       RETURNING id;
     `;
 
@@ -176,16 +134,13 @@ module.exports = (db) => {
     });
   }
 
-  
   return {
     getActiveOrders,
     getInactiveOrders,
-    updateStatusToAcceptedOrder,
+    updateOrderStatusToAccepted,
+    updatePastReadyOrdersToComplete,
     getOrderDetails,
-    updateStatusToCompletedOrder,
     getMenu,
-    updateOrder,
     addOrder
-    
   }
 }

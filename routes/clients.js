@@ -2,19 +2,19 @@ const express = require('express');
 const router  = express.Router();
 
 module.exports = (dbHelpers) => {
-  // Dashboard page
+  // GET dashboard page
   router.get('/', (req, res) => {
-    const inactiveOrderPromise = dbHelpers.getInactiveOrders();
-    const activeOrderPromise = dbHelpers.getActiveOrders();
+    dbHelpers.updatePastReadyOrdersToComplete()
+    .then(() => {
+      const inactiveOrdersPromise = dbHelpers.getInactiveOrders();
+      const activeOrdersPromise = dbHelpers.getActiveOrders();
 
-    Promise.all([inactiveOrderPromise, activeOrderPromise])
+      return Promise.all([inactiveOrdersPromise, activeOrdersPromise]);
+    })
     .then(orders_data => {
-      console.log('orders_data:', orders_data); // @TODELETE
       const inactive_orders_data = orders_data[0];
       const active_orders_data = orders_data[1];
       const pageVars = {inactive_orders_data, active_orders_data};
-      console.log ("This is inactive orders: ", inactive_orders_data)
-      console.log ("This is active orders: ", active_orders_data)
       res.render('index', pageVars);
     })
     .catch(e => {
@@ -24,7 +24,7 @@ module.exports = (dbHelpers) => {
     });
   });
 
-  // Menu order page
+  // GET menu order page
   router.get('/order', (req, res) => {
     dbHelpers.getMenu()
     .then(menu_data => {
@@ -38,7 +38,7 @@ module.exports = (dbHelpers) => {
     });
   });
 
-  // Individual order page
+  // GET individual order page
   router.get('/order/:id', (req, res) => {
     const orderId = req.params.id;
 
@@ -54,7 +54,7 @@ module.exports = (dbHelpers) => {
     });
   });
 
-  // POST an order
+  // POST a new order
   router.post('/order', (req, res) => {
     const menuItems = function (items) {
       let result = {}
@@ -84,12 +84,13 @@ module.exports = (dbHelpers) => {
     });
 
     Promise.all([addOrderPromise, sendSMSPromise])
-    .then(message => {
-      console.log(message);
+    .then(response => {
+      console.log(response[1].body); // Show Twilio log
       res.redirect('/client');
     })
     .catch(e => {
       console.error(e);
+      res.status(500);
       res.send(e);
     });
   });
