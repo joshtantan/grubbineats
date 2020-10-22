@@ -1,9 +1,17 @@
 body {
   padding: 20px;
 }
+
+.outer-box {
+  display: flex;
+  flex-direction: row;
+}
+
 #menu {
+  display: flex;
+  flex-direction: column;
   border: 2px solid;
-  width: 60%;
+  width: 70%;
   padding: 10px;
 }
 .menu-row {
@@ -11,9 +19,11 @@ body {
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-
 }
 
+#total-container {
+  margin-left: 30px;
+}
 
 
 

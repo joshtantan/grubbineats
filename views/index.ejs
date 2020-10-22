@@ -7,15 +7,18 @@
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
     <link rel="stylesheet" href="/styles/index.css" type="text/css" />
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
   </head>
 
+
   <body>
     <!-- nav bar  -->
     <%- include('partials/_nav') %>
-    <h2>Hello user</h1>
+    <div class = "outer-box">
+    <h2>Hello user</h2>
     <!-- button to order -->
     <form method = "GET" action = "/client/order">
       <button type = "submit"> Place An Order </button>
@@ -27,20 +30,26 @@
         <tr>
           <th>Order Number</th>
           <th>Order Placed Time</th>
-          <th>Time Completed</th>
           <th>Order Status</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
+
+        <% for (let active_order of active_orders_data) {    %>
+
+          <tr>
 
 
-          <td>001</td>
-          <td>12:00</td>
-          <td>12:30</td>
-          <td>pending</td>
+            <td> <a href="/client/order/<%= active_order['id'] %>"> <button> <%= active_order['id'] %>  </button></a></td>
+            <td> <%= moment(active_order['created_at']).format('MMMM Do YYYY, h:mm:ss a')  %></td>
 
-        </tr>
+            <td> <%= active_order['status'] %></td>
+
+          </tr>
+
+          <%}%>
+
+
 
       </tbody>
     </table>
@@ -51,26 +60,25 @@
         <tr>
           <th>Order Number</th>
           <th>Order Placed Time</th>
-          <th>Time Completed</th>
           <th>Order Status</th>
         </tr>
       </thead>
       <tbody>
-        
-        <tr>
+        <% for (let past_order of inactive_orders_data) {    %>
 
-          
+          <tr>
 
-          <td>002</td>
-          <td>6:00</td>
-          <td>6:30</td>
-          <td>completed</td>
 
-        </tr>
-        
-        <tr></tr>
-        <tr></tr>
+            <td> <a href="/client/order/<%= past_order['id'] %>"> <button> <%= past_order['id'] %>  </button></a></td>
+            <td> <%= moment(past_order['created_at']).format('MMMM Do YYYY, h:mm:ss a')  %></td>
+            <td> <%= past_order['status'] %></td>
+
+          </tr>
+
+          <%}%>
+
       </tbody>
     </table>
+  </div>
   </body>
 </html>

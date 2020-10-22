@@ -16,14 +16,19 @@
     <%- include('partials/_nav') %>
     <h2>This is the client's individual order page</h1>
     <!-- button to order -->
+
     <div class = "single-order-container">
       <p>
-        Order Number: <%= detail[0]['order_id'] %> </br>
-        Order Date: <%= moment(detail[0]['created_at']).format('MMM Do YYYY, h:mm:ss a')  %>
+        Order Number: <%= order_item[0]['order_id'] %> </br>
+        Order Date: <%= moment(order_item[0]['created_at']).format('MMM Do YYYY, h:mm:ss a')  %>
       </p>
     </div>
     
   
+
+    <% for (let order_item of order_data) { %>
+
+
       <table id= "active-orders-table">
         <thead>
           
@@ -35,19 +40,30 @@
           </tr>
         </thead>
         <tbody>
+
           
           <% for (let obj in detail) { %>
+
+
+
+
               <tr>
-                <td> <img src= <%= detail[obj]['url_photo'] %> ></td>
-                 
-                <td> <%= detail[obj]['item_name'] %> </td>
-                <td> <%= detail[obj]['quantity'] %> </td>
-                <td> <%= detail[obj]['price_cents'] %></td>
+                <td> <img src= <%= order_item['url_photo'] %> ></td>
+
+                <td> <%= order_item['item_name'] %> </td>
+                <td> <%= order_item['quantity'] %> </td>
+                <td> <%= order_item['price_cents'] %></td>
               </tr>
+
           
            <% } %>
           
   
+
+       
+
+
+
         </tbody>
       </table>
       

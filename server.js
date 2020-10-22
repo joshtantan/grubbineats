@@ -15,6 +15,10 @@ const dbParams = require('./lib/db.js');
 const db = new Pool(dbParams);
 db.connect();
 
+app.set("view engine", "ejs");
+app.use(morgan('dev'));
+app.use(bodyParser.urlencoded({ extended: true }));
+
 // Moment API to display time and date in 'MMMM Do YYYY, h:mm:ss a' format
 const moment = require("moment");
 
@@ -23,17 +27,14 @@ app.use((req, res, next) => {
   next();
 });
 
-app.set("view engine", "ejs");
-app.use(morgan('dev'));
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static('public'));
-
 app.use('/styles', sass({
   src: __dirname + '/styles',
   dest: __dirname + '/public/styles',
   debug: true,
   outputStyle: 'expanded'
 }));
+
+app.use(express.static('public'));
 
 // Attach helpers to query db
 const clientHelpers = require('./helper_functions.js')(db);

@@ -17,18 +17,25 @@
     <%- include('partials/_nav') %>
     <h2>Place your order here: </h2>
 
-    <h2> Your Total </h2>
-    <p id="total-price">$0.00</p>
 
+        <h2> Your Total </h2>
+        <p id="total-price">$0.00</p>
 
-    <!-- button to order -->
-    <form method = "POST" action = "/client/order">
-    <button type = "submit"> Send Order </button>
-    </form>
+        <!-- button to order -->
+        <form method = "POST" action = "/">
+        <button type = "submit"> Send Order </button>
+    <!-- <input type="hidden" name = "clientId" value = "1"> -->
+
 
     <% for (const menu_item of menu_data) { %>
     <div id = "menu">
+
+      <% for (let obj in menu_data) { %>
       <div class = "menu-row">
+
+        <div class = "menu_id">
+          <p><%= menu_item['id'] %></p>
+        </div>
 
         <div class = "menu-image">
           <img src = <%= menu_item['url_photo'] %> >
@@ -44,14 +51,13 @@
         </div>
 
         <div class = "quantity-input">
-          <input class="dish-counter" id= "<%= menu_item['price_cents']/100 %>" type="number" min="0" max ="50" value="0">
+          <input name = "<%= menu_item['id'] %>" class="dish-counter" id= "<%= menu_item['price_cents']/100 %>" type="number" min="0" max ="50" value="0">
         </div>
 
       </div>
     </div>
-
-    <% } %>
-
+      <% } %>
+  </form>
 
     <script type = "text/javascript">
       $(document).ready(function() {
@@ -68,7 +74,6 @@
         })
       })
     </script>
-
 
 
   </body>
