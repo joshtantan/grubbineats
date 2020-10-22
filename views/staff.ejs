@@ -5,6 +5,7 @@
 
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
     <link rel="stylesheet" href="/styles/staff.css" type="text/css" />
 
@@ -15,6 +16,7 @@
   <body>
     <!-- nav bar  -->
     <%- include('partials/_nav') %>
+    <div class = "outer-container">
     <h2>Staff Page</h1>
     <!-- button to order -->
     <h3>Accept orders here: </h3>
@@ -22,10 +24,10 @@
       <label for ="order-id">Enter the order id: </label>
       <input type="text" name = "order_id">
 
-      <label for = "completion-time">Enter the completion time: </label>
-      <input type="text" name = "completion_time" placeholder="Enter length ex- 30">
+      <label for = "completion-time">Enter completion minutes </label>
+      <input type="text" name = "completion_time" placeholder="example: 20">
 
-      <button type = "submit" > Accept Order </button>
+      <button id= "accept-button" type = "submit" > Accept Order </button>
     </form>
     <!-- active orders tables -->
     <h3> Active Orders </h3>
@@ -38,22 +40,13 @@
         </tr>
       </thead>
       <tbody>
-        
-        
-        
           <% for (let obj in order) { %>
-          
-           
             <tr>
-              <td> <a href="/staff/order/<%= order[obj]['id'] %>"> <button> <%= order[obj]['id'] %>  </button></a></td>
-              <td> <%= moment(order[obj]['created_at']).format('MMMM Do YYYY, h:mm:ss a')  %></td> 
+              <td> <a href="/staff/order/<%= order[obj]['id'] %>"> <button class= "order-button"> <%= order[obj]['id'] %>  </button></a></td>
+              <td> <%= moment(order[obj]['created_at']).format('MMMM Do YYYY, h:mm:ss a')  %></td>
               <td> <%= order[obj]['status'] %></td>
             </tr>
-
-       
           <% } %>
-        
-
       </tbody>
     </table>
     <!-- past orders tables -->
@@ -67,24 +60,15 @@
         </tr>
       </thead>
       <tbody>
-        
-          
-           
         <% for (let obj in pastorder) { %>
-          
-           
           <tr>
-            <td> <a href="/staff/order/<%= pastorder[obj]['id'] %>"> <button> <%= pastorder[obj]['id'] %>  </button></a> </td> 
+            <td> <a href="/staff/order/<%= pastorder[obj]['id'] %>"> <button class="order-button"> <%= pastorder[obj]['id'] %>  </button></a> </td>
             <td> <%= moment(pastorder[obj]['created_at']).format('MMMM Do YYYY, h:mm:ss a')  %></td>
             <td> <%= pastorder[obj]['status'] %></td>
           </tr>
-
-     
         <% } %>
-
-     
-        
       </tbody>
     </table>
+  </div>
   </body>
 </html>

@@ -28,7 +28,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/styles', sass({
-  src: __dirname + '/styles',
+  src: __dirname + '/sass',
   dest: __dirname + '/public/styles',
   debug: true,
   outputStyle: 'expanded'
@@ -37,10 +37,9 @@ app.use('/styles', sass({
 app.use(express.static('public'));
 
 // Attach helpers to query db
-const clientHelpers = require('./helper_functions.js')(db);
-const staffHelpers = require('./helper_functions.js')(db);
-const clientRoutes = require('./routes/clients')(clientHelpers);
-const staffRoutes = require('./routes/staff')(staffHelpers);
+const helpers = require('./helpers/helper_functions.js')(db);
+const clientRoutes = require('./routes/clients')(helpers);
+const staffRoutes = require('./routes/staff')(helpers);
 
 // Mount all resource routes
 app.use('/client', clientRoutes);

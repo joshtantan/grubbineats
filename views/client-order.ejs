@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
     <link rel="stylesheet" href="/styles/client-order.css" type="text/css" />
-
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
   </head>
@@ -15,27 +15,28 @@
   <body>
     <!-- nav bar  -->
     <%- include('partials/_nav') %>
-    <h2>Place your order here: </h2>
+    <div class = "outer-box">
 
-
-        <h2> Your Total </h2>
-        <p id="total-price">$0.00</p>
+      <div class = "total-container">
+    <h2> Your Total </h2>
+    <p id="total-price">$0.00</p>
 
         <!-- button to order -->
-        <form method = "POST" action = "/">
+        <form method = "POST" action = "/client/order">
         <button type = "submit"> Send Order </button>
+
+      </div>
+
+      <div class = "menu-container">
+        <h2>Place your order here: </h2>
     <!-- <input type="hidden" name = "clientId" value = "1"> -->
-
-
     <% for (const menu_item of menu_data) { %>
     <div id = "menu">
-
-      
       <div class = "menu-row">
 
-        <div class = "menu_id">
+        <!-- <div class = "menu_id">
           <p><%= menu_item['id'] %></p>
-        </div>
+        </div> -->
 
         <div class = "menu-image">
           <img src = <%= menu_item['url_photo'] %> >
@@ -58,6 +59,7 @@
     </div>
       <% } %>
   </form>
+</div>
 
     <script type = "text/javascript">
       $(document).ready(function() {
@@ -75,6 +77,6 @@
       })
     </script>
 
-
+</div>
   </body>
 </html>
