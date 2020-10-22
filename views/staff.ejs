@@ -30,6 +30,7 @@
       <button id= "accept-button" type = "submit" > Accept Order </button>
     </form>
     <!-- active orders tables -->
+    
     <h3> Active Orders </h3>
     <table id= "active-orders-table">
       <thead>
@@ -47,8 +48,10 @@
               <td> <%= order[obj]['status'] %></td>
             </tr>
           <% } %>
+          
       </tbody>
     </table>
+    
     <!-- past orders tables -->
     <h3> Past Orders </h3>
     <table id= "past-orders-table">

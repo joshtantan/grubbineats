@@ -22,10 +22,13 @@
   padding: 10px 15px;
 }
 
+tr:hover {background-color: #f5f5f5};
+
 #active-orders-table {
   border-radius: 8px;
   border: 3px solid;
   padding: 20px;
+  background-color: #fcc5b2;
 
   th, td {
     padding: 5px;

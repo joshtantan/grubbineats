@@ -12,6 +12,10 @@ p{
   margin-bottom: 50px;
 }
 
+#active-orders-table {
+  border: 1px solid;
+}
+
 th {
   padding-bottom: 20px;
 }
@@ -20,6 +24,7 @@ td {
   text-align: center;
   vertical-align: middle;
   padding: 10px;
+  border: 1px solid;
 }
 
 button {

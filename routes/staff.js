@@ -60,14 +60,17 @@ module.exports = (helper) => {
 
 
     //twilio message
+    // from:'+13137778807',
+    //   to:'+15875748681'
     const accountSid = process.env.TWILIO_ACCOUNT_SID;
     const autheToken = process.env.TWILIO_ATTH_TOKEN;
     
     const client = require('twilio')(accountSid, autheToken);
     client.messages.create({
       body: 'Your order will be ready at' + newDateObj,
-      from:'+13137778807',
-      to:'+15875748681'
+      
+      from: '+14172724534',
+      to: '+16047672195'
     })
     .then((message) => console.log(message))
     .catch((err) => console.log(err));
