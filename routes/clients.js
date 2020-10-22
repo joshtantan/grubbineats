@@ -2,23 +2,19 @@ const express = require('express');
 const router  = express.Router();
 
 module.exports = (dbHelpers) => {
-  // Dashboard page
+  // GET dashboard page
   router.get('/', (req, res) => {
     dbHelpers.updatePastReadyOrdersToComplete()
     .then(() => {
-      console.log('here');
-      const inactiveOrderPromise = dbHelpers.getInactiveOrders();
-      const activeOrderPromise = dbHelpers.getActiveOrders();
+      const inactiveOrdersPromise = dbHelpers.getInactiveOrders();
+      const activeOrdersPromise = dbHelpers.getActiveOrders();
 
-      console.log('here');
-      return Promise.all([inactiveOrderPromise, activeOrderPromise])
+      return Promise.all([inactiveOrdersPromise, activeOrdersPromise]);
     })
     .then(orders_data => {
       const inactive_orders_data = orders_data[0];
       const active_orders_data = orders_data[1];
       const pageVars = {inactive_orders_data, active_orders_data};
-      console.log ("Inactive orders: ", inactive_orders_data)
-      console.log ("Active orders: ", active_orders_data)
       res.render('index', pageVars);
     })
     .catch(e => {
@@ -28,7 +24,7 @@ module.exports = (dbHelpers) => {
     });
   });
 
-  // Menu order page
+  // GET menu order page
   router.get('/order', (req, res) => {
     dbHelpers.getMenu()
     .then(menu_data => {
@@ -42,7 +38,7 @@ module.exports = (dbHelpers) => {
     });
   });
 
-  // Individual order page
+  // GET individual order page
   router.get('/order/:id', (req, res) => {
     const orderId = req.params.id;
 
@@ -58,7 +54,7 @@ module.exports = (dbHelpers) => {
     });
   });
 
-  // POST an order
+  // POST a new order
   router.post('/order', (req, res) => {
     const menuItems = function (items) {
       let result = {}
@@ -88,12 +84,13 @@ module.exports = (dbHelpers) => {
     });
 
     Promise.all([addOrderPromise, sendSMSPromise])
-    .then(message => {
-      console.log(message);
+    .then(response => {
+      console.log('Twilio SMS log:', response[1].body);
       res.redirect('/client');
     })
     .catch(e => {
       console.error(e);
+      res.status(500);
       res.send(e);
     });
   });

@@ -102,7 +102,7 @@ module.exports = (db) => {
 
     const ordersTblQuery = `
       INSERT INTO orders (client_id, status, created_at)
-      VALUES (${client_id}, 'Created', NOW())
+      VALUES (${client_id}, 'Pending', NOW())
       RETURNING id;
     `;
 

@@ -40,11 +40,11 @@
         </tr>
       </thead>
       <tbody>
-          <% for (let obj in order) { %>
+          <% for (let obj in active_orders_data) { %>
             <tr>
-              <td> <a href="/staff/order/<%= order[obj]['id'] %>"> <button class= "order-button"> <%= order[obj]['id'] %>  </button></a></td>
-              <td> <%= moment(order[obj]['created_at']).format('MMMM Do YYYY, h:mm:ss a')  %></td>
-              <td> <%= order[obj]['status'] %></td>
+              <td> <a href="/staff/order/<%= active_orders_data[obj]['id'] %>"> <button class= "order-button"> <%= active_orders_data[obj]['id'] %>  </button></a></td>
+              <td> <%= moment(active_orders_data[obj]['created_at']).format('MMMM Do YYYY, h:mm:ss a')  %></td>
+              <td> <%= active_orders_data[obj]['status'] %></td>
             </tr>
           <% } %>
       </tbody>
@@ -60,11 +60,11 @@
         </tr>
       </thead>
       <tbody>
-        <% for (let obj in pastorder) { %>
+        <% for (let obj in inactive_orders_data) { %>
           <tr>
-            <td> <a href="/staff/order/<%= pastorder[obj]['id'] %>"> <button class="order-button"> <%= pastorder[obj]['id'] %>  </button></a> </td>
-            <td> <%= moment(pastorder[obj]['created_at']).format('MMMM Do YYYY, h:mm:ss a')  %></td>
-            <td> <%= pastorder[obj]['status'] %></td>
+            <td> <a href="/staff/order/<%= inactive_orders_data[obj]['id'] %>"> <button class="order-button"> <%= inactive_orders_data[obj]['id'] %>  </button></a> </td>
+            <td> <%= moment(inactive_orders_data[obj]['created_at']).format('MMMM Do YYYY, h:mm:ss a')  %></td>
+            <td> <%= inactive_orders_data[obj]['status'] %></td>
           </tr>
         <% } %>
       </tbody>

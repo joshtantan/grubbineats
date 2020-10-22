@@ -1,4 +1,3 @@
-
 .outer-box {
   display: flex;
   flex-direction: row;
@@ -27,7 +26,6 @@ button {
   padding: 10px;
 }
 
-
 .menu-row {
   display: flex;
   flex-direction: row;
@@ -38,9 +36,11 @@ button {
 .menu-image {
   padding: 5px;
 }
+
 .menu-item {
   margin-left: 50px;
 }
+
 .item-price {
   margin-left: 20px;
 }
@@ -65,4 +65,3 @@ button {
 .item-price {
   font-weight: 600
 }
-
