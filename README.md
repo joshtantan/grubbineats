@@ -3,10 +3,13 @@
 GrubbinEats is a web application designed to allow its customers to place orders for pick-up at a local restaurant.
 
 ## Final Product
-!["Screenshot of customer dashboard"](https://github.com/joshtantan/grubbineats/blob/master/docs/customer_dashboard.png?raw=true) 
-!["Screenshot of page where customer places an order"](https://github.com/joshtantan/grubbineats/blob/master/docs/customer_ordering_page.png?raw=true) 
-!["Screenshot of the restaurant dashboard and where they accept orders"](https://github.com/joshtantan/grubbineats/blob/master/docs/restaurant_dashboard.png?raw=true)
 
+### Customer Dashboard
+!["Screenshot of customer dashboard"](https://github.com/joshtantan/grubbineats/blob/master/docs/customer_dashboard.png?raw=true) 
+### Menu Page
+!["Screenshot of page where customer places an order"](https://github.com/joshtantan/grubbineats/blob/master/docs/customer_ordering_page.png?raw=true) 
+### Staff Dashboard
+!["Screenshot of the restaurant dashboard and where they accept orders"](https://github.com/joshtantan/grubbineats/blob/master/docs/restaurant_dashboard.png?raw=true)
 
 ## Dependencies
 
@@ -22,10 +25,29 @@ GrubbinEats is a web application designed to allow its customers to place orders
 - Chalk
 - Node SASS middleware
 
-## Getting Started
+## Runtime Uses
 
-- Install all dependencies (using the `npm i` command while in the project root directory).
-- Run the development web server using the `npm start` command.
+> All commands are run from the project root directory
+1. Install all dependencies before first use
+```shell
+$ npm i
+```
+- Start the web server
+```shell
+$ npm start
+```
+- Start the web server with `nodemon` for auto-refresh on any code changes
+```shell
+$ npm run local
+```
+- Reset the database (with seeding)
+```shell
+$ npm run db:reset
+```
+- Reset the database (without seeding)
+```shell
+$ npm run db:setup
+```
 
 ## Image Credits
 
