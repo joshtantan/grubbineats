@@ -1,19 +1,33 @@
-body {
-  padding: 20px;
-}
 
 .outer-box {
   display: flex;
   flex-direction: row;
+  padding: 20px;
+}
+
+h2 {
+  font-size: 25px;
+}
+
+button {
+  background-color: #F2784B;
+  border: none;
+  border-radius: 8px;
+  padding: 15px 30px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 700;
 }
 
 #menu {
   display: flex;
   flex-direction: column;
-  border: 2px solid;
-  width: 70%;
+  border: 3px solid;
+  width: 80%;
   padding: 10px;
 }
+
+
 .menu-row {
   display: flex;
   flex-direction: row;
@@ -21,9 +35,34 @@ body {
   align-items: center;
 }
 
-#total-container {
+.menu-image {
+  padding: 5px;
+}
+.menu-item {
+  margin-left: 50px;
+}
+.item-price {
+  margin-left: 20px;
+}
+
+.quantity-input {
+  margin-left: 20px;
+}
+
+.total-container {
   margin-left: 30px;
 }
 
+.menu-container {
+  margin-left: 100px;
+}
 
+#total-price {
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.item-price {
+  font-weight: 600
+}
 
