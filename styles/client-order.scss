@@ -23,14 +23,30 @@ button {
   display: flex;
   flex-direction: column;
   border: 3px solid;
-  width: 70%;
+  width: 80%;
   padding: 10px;
 }
+
+
 .menu-row {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
+}
+
+.menu-image {
+  padding: 5px;
+}
+.menu-item {
+  margin-left: 50px;
+}
+.item-price {
+  margin-left: 20px;
+}
+
+.quantity-input {
+  margin-left: 20px;
 }
 
 .total-container {

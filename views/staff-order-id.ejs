@@ -5,8 +5,9 @@
 
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/staff.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/client-order-id.css" type="text/css" />
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
@@ -15,45 +16,37 @@
   <body>
     <!-- nav bar  -->
     <%- include('partials/_nav') %>
-    <h2>This is the staff individual order page</h1>
-    <!-- button to order -->
-    <% for (let obj in detail) { %>
+
     <div class = "single-order-container">
       <p>
-        Order Number: <%= detail[obj]['order_id'] %> </br>
-        Order Date: <%= moment(detail[obj]['created_at']).format('MMMM Do YYYY, h:mm:ss a')  %>
+        Order Number: <%= detail[0]['order_id'] %> </br>
+        Order Date: <%= moment(detail[0]['created_at']).format('MMMM Do YYYY, h:mm:ss a')  %>
       </p>
-    </div>
 
-    <table id= "active-orders-table">
-      <thead>
-        <tr>
-          <th>image</th>
-          <th>items</th>
-          <th>Quantity</th>
-          <th>price</th>
-        </tr>
-      </thead>
+      <table id= "active-orders-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th></th>
+            <th>Quantity</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+    <% for (let obj in detail) { %>
       <tbody>
-        
-          
-            <tr>
-              <td> <img src= <%= detail[obj]['url_photo'] %> ></td>
-               
-              <td> <%= detail[obj]['item_name'] %> </td>
-              <td> <%= detail[obj]['quantity'] %> </td>
-              <td> <%= detail[obj]['price_cents'] %></td>
-            </tr>
-        <% } %>
-
-        
-
+        <tr>
+          <td> <img src= <%= detail[obj]['url_photo'] %> ></td>
+          <td> <%= detail[obj]['item_name'] %> </td>
+          <td> <%= detail[obj]['quantity'] %> </td>
+          <td> $<%= detail[obj]['price_cents']/100 * detail[obj]['quantity'] %></td>
+          </tr>
+    <% } %>
       </tbody>
     </table>
   </br>
     <form method = "GET" action = "/staff">
       <button type = "submit"> Go back to orders</button>
     </form>
-
+  </div>
   </body>
 </html>

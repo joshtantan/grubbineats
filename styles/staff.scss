@@ -1,38 +1,58 @@
-button {
-  background-color: orange;
+.outer-container {
+  padding: 20px;
+}
 
+#accept-button {
+  background-color: #F2784B;
+  border: none;
+  border-radius: 8px;
+  padding: 15px 30px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 700;
+  margin-left: 10px;
+}
+
+.order-button {
+  background-color: transparent;
+  border: 2px solid;
+  border-radius: 5px;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 10px 15px;
 }
 
 #active-orders-table {
-  border-collapse: collapse;
+  border-radius: 8px;
+  border: 3px solid;
+  padding: 20px;
 
   th, td {
-    border: 3px solid;
     padding: 5px;
+    text-align: center;
+    vertical-align: middle;
   }
 
-  th { background-color: green}
-  button {
-    width: 150px;
+  th {
+    font-size: 20px;
   }
-
 }
 
 
 #past-orders-table {
-  border-collapse: collapse;
+  border: 3px solid;
+  border-radius: 8px;
+  background-color: #acaaaa;
+  padding: 20px;
 
   th, td {
-    border: 3px solid;
+    text-align: center;
+    vertical-align: middle;
     padding: 5px;
   }
 
   th {
-    background-color: rosybrown;
-  }
-
-  button {
-    width: 150px;
+    font-size: 20px;
   }
 
 }
