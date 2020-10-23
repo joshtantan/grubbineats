@@ -2,10 +2,9 @@
 <html lang="en">
   <head>
     <title>Grubbin' Eats</title>
-
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap"/>
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
     <link rel="stylesheet" href="/styles/client-order-id.css" type="text/css" />
 
@@ -16,13 +15,11 @@
   <body>
     <!-- nav bar  -->
     <%- include('partials/_nav') %>
-
     <div class = "single-order-container">
       <p>
         Order Number: <%= detail[0]['order_id'] %> </br>
         Order Date: <%= moment(detail[0]['created_at']).format('MMMM Do YYYY, h:mm:ss a')  %>
       </p>
-
       <table id= "active-orders-table">
         <thead>
           <tr>
@@ -32,21 +29,24 @@
             <th>Price</th>
           </tr>
         </thead>
-    <% for (let obj in detail) { %>
-      <tbody>
-        <tr>
-          <td> <img src= <%= detail[obj]['url_photo'] %> ></td>
-          <td> <%= detail[obj]['item_name'] %> </td>
-          <td> <%= detail[obj]['quantity'] %> </td>
-          <td> $<%= detail[obj]['price_cents']/100 * detail[obj]['quantity'] %></td>
-          </tr>
-    <% } %>
-      </tbody>
-    </table>
-  </br>
-    <form method = "GET" action = "/staff">
-      <button type = "submit"> Go back to orders</button>
-    </form>
-  </div>
+        <% let total = 0 %>
+        <% for (let obj in detail) { %>
+          <tbody>
+            <tr>
+              <td> <img src= <%= detail[obj]['url_photo'] %> ></td>
+              <td> <%= detail[obj]['item_name'] %> </td>
+              <td> x<%= detail[obj]['quantity'] %> </td>
+              <% price = (parseInt(detail[obj]['price_cents'])/100 * parseInt(detail[obj]['quantity'])) %>
+              <td> $<%= (detail[obj]['price_cents']/100 * detail[obj]['quantity']).toFixed(2) %></td>
+            </tr>
+            <% total = total + price %>
+          <% } %>
+          </tbody>
+      </table>
+      <p>Total: $<%= total %></p>
+      <form method = "GET" action = "/staff">
+        <button type = "submit"> Go back to orders</button>
+      </form>
+    </div>
   </body>
 </html>

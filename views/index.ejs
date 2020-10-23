@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
     <link rel="stylesheet" href="/styles/index.css" type="text/css" />
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" />
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
@@ -15,65 +15,61 @@
 
   <body>
     <!-- nav bar  -->
-    <%- include('partials/_nav') %>
+  <%- include('partials/_nav') %>
     <div class = "outer-box">
-    <div class = "dash-header">
-    <h2>Hungry? </h2>
-    <!-- button to order -->
-    <form method = "GET" action = "/client/order">
-      <button id = "place-order-button" type = "submit"> Place A New Order </button>
-    </form>
-  </div>
-  <div class = "tables-container">
-    <!-- active orders tables -->
-<div class = "orders-container">
-    <h3> Active Orders </h3>
-    <table id= "active-orders-table">
-      <thead>
-        <tr>
-          <th>Order Number</th>
-          <th>Order Placed Time</th>
-          <th>Order Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% for (let active_order of active_orders_data) {    %>
-          <tr>
-            <td> <a href="/client/order/<%= active_order['id'] %>"> <button class ="order-button"> <%= active_order['id'] %>  </button></a></td>
-            <td> <%= moment(active_order['created_at']).format('MMMM Do YYYY, h:mm:ss a')  %></td>
-            <td> <%= active_order['status'] %></td>
-          </tr>
-        <%}%>
+      <div class = "dash-header">
+        <h2>Hungry? </h2>
+        <!-- button to order -->
+        <form method = "GET" action = "/client/order">
+          <button id = "place-order-button" type = "submit"> Place A New Order </button>
+        </form>
+      </div>
+      <div class = "tables-container">
+        <!-- active orders tables -->
+        <div class = "orders-container">
+          <h3> Active Orders </h3>
+          <table id= "active-orders-table">
+            <thead>
+              <tr>
+                <th>Order Number</th>
+                <th>Order Placed Time</th>
+                <th>Order Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% for (let active_order of active_orders_data) {    %>
+                <tr>
+                  <td> <a href="/client/order/<%= active_order['id'] %>"> <button class ="order-button"> <%= active_order['id'] %>  </button></a></td>
+                  <td> <%= moment(active_order['created_at']).format('MMMM Do YYYY, h:mm:ss a')  %></td>
+                  <td> <%= active_order['status'] %></td>
+                </tr>
+              <%}%>
+            </tbody>
+          </table>
         </div>
-      </tbody>
-    </table>
-  </div>
-
-    <!-- past orders tables -->
-    <div class = "orders-container">
-    <h3> Completed Orders </h3>
-    <div style="overflow:scroll;height:300px;width:100%;overflow:auto">
-    <table id= "past-orders-table">
-      <thead>
-        <tr>
-          <th>Order Number</th>
-          <th>Order Placed Time</th>
-          <th>Order Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% for (let past_order of inactive_orders_data) {    %>
-          <tr>
-            <td> <a href="/client/order/<%= past_order['id'] %>"> <button class = "order-button"><%= past_order['id'] %>  </button></a></td>
-            <td> <%= moment(past_order['created_at']).format('MMMM Do YYYY, h:mm:ss a')  %></td>
-            <td> <%= past_order['status'] %></td>
-          </tr>
-        <%}%>
-      </tbody>
-    </table>
-  </div>
+        <!-- past orders tables -->
+        <div class = "orders-container">
+          <h3> Completed Orders </h3>
+          <table id= "past-orders-table">
+            <thead>
+              <tr>
+                <th>Order Number</th>
+                <th>Order Placed Time</th>
+                <th>Order Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% for (let past_order of inactive_orders_data) {    %>
+                <tr>
+                  <td> <a href="/client/order/<%= past_order['id'] %>"> <button class = "order-button"><%= past_order['id'] %>  </button></a></td>
+                  <td> <%= moment(past_order['created_at']).format('MMMM Do YYYY, h:mm:ss a')  %></td>
+                  <td> <%= past_order['status'] %></td>
+                </tr>
+              <%}%>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
-  </div>
-  </div>
   </body>
 </html>

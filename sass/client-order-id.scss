@@ -13,25 +13,27 @@ p{
 }
 
 #active-orders-table {
-  border: 1px solid;
+  border: 3px solid;
+  border-radius: 8px;
+  padding: 10px;
 }
 
-th {
-  padding-bottom: 20px;
+img {
+  border-radius: 12px;
 }
-
 td {
   text-align: center;
   vertical-align: middle;
   padding: 10px;
-  border: 1px solid;
+  font-size: 18px;
+  font-weight: 600;
 }
 
 button {
   background-color: transparent;
-  border: 2px solid;
-  border-radius: 5px;
-  font-size: 15px;
+  border: 3px solid;
+  border-radius: 8px;
+  font-size: 20px;
   font-weight: 700;
   padding: 10px 25px;
 }

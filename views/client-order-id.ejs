@@ -20,32 +20,25 @@
         Order Number: <%= order_data[0]['order_id'] %> </br>
         Order Date: <%= moment(order_data[0]['created_at']).format('MMMM Do YYYY, h:mm:ss a')  %>
       </p>
-
       <table id= "active-orders-table">
-        <thead>
-          <tr>
-            <th></th>
-            <th>Item</th>
-            <th>Quantity</th>
-            <th>Price</th>
-          </tr>
-        </thead>
-
+        <% let total = 0 %>
         <% for (let order_item of order_data) { %>
-        <tbody>
-          <tr>
-            <td> <img src= <%= order_item['url_photo'] %>> </td>
-            <td> <%= order_item['item_name'] %> </td>
-            <td> <%= order_item['quantity'] %> </td>
-            <td> $<%= order_item['price_cents']/100 * order_item['quantity'] %> </td>
-          </tr>
-        </tbody>
+          <tbody>
+            <tr>
+              <td> <img src= <%= order_item['url_photo'] %>> </td>
+              <td> <%= order_item['item_name'] %> </td>
+              <td> x<%= order_item['quantity'] %> </td>
+              <% price = (parseInt(order_item['price_cents'])/100 * parseInt(order_item['quantity'])) %>
+              <td> $<%= (order_item['price_cents']/100 * order_item['quantity']).toFixed(2) %> </td>
+            </tr>
+          </tbody>
+          <% total = total + price %>
         <% } %>
       </table>
-
-    <form method = "GET" action = "/">
-      <button type = "submit"> Go back to orders</button>
-    </form>
-  </div>
+      <p>Total: $<%= total %></p>
+      <form method = "GET" action = "/">
+        <button type = "submit"> Go back to orders</button>
+      </form>
+    </div>
   </body>
 </html>
