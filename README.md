@@ -1,6 +1,6 @@
 # GrubbinEats Project
 
-GrubbinEats is a web application designed to allow its customers to place orders for pick-up at a local restaurant.
+GrubbinEats is a full stack web application designed to allow its customers to place orders for pick-up at a local restaurant while notifying and allowing the restaurant staff to accept and provide time estimates to users via SMS.
 
 ## Final Product
 
