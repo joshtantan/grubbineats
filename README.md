@@ -13,7 +13,7 @@ GrubbinEats is a full stack web application designed to allow its customers to p
 
 ## Dependencies
 
-- Node.js
+- Node
 - Express
 - EJS
 - Twilio
