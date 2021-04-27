@@ -13,6 +13,7 @@
   "author": "Lighthouse Labs",
   "license": "MIT",
   "dependencies": {
+    "bindings": "^1.5.0",
     "body-parser": "^1.19.0",
     "chalk": "^2.4.2",
     "dotenv": "^2.0.0",
