@@ -32,6 +32,9 @@ GrubbinEats is a full stack web application designed to allow its customers to p
 ```shell
 $ npm i
 ```
+2. Ensure `psql` is installed and create a new database.
+3. Use the `.env.example` file to fill in the necessary credentials. Some default values have been left there that may be customized to your preferences.
+4. Rename `.env.example` to `.env` for use.
 - Start the web server
 ```shell
 $ npm start
