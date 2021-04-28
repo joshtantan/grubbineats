@@ -1,11 +1,11 @@
-require('dotenv').config();
+require('dotenv').config({ silent: true });
 
-const PORT       = process.env.PORT || 8080;
-const express    = require('express');
-const app        = express();
+const PORT = process.env.PORT || 8080;
+const express = require('express');
+const app = express();
 const bodyParser = require('body-parser');
-const morgan     = require('morgan');
-const sass       = require('node-sass-middleware');
+const morgan = require('morgan');
+const sass = require('node-sass-middleware');
 
 const { Pool } = require('pg');
 const dbParams = require('./lib/db.js');
