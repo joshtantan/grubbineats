@@ -25,7 +25,14 @@ GrubbinEats is a full stack web application designed to allow its customers to p
 - Chalk
 - Node SASS middleware
 
-## Runtime Uses
+## Runtime Usage
+
+### Heroku Deployment
+
+- [Client API](https://grubbineats-staging.herokuapp.com/client)
+- [Staff API](https://grubbineats-staging.herokuapp.com/staff)
+
+### Local Deployment
 
 > All commands are run from the project root directory
 1. Install all dependencies before first use
